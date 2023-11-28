@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id('answer_id');
-            $table->id('user_id');
-            $table->id('question_id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('question_id');
             $table->integer('strokes');
             $table->json('play_history');
             $table->timestamps();
