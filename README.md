@@ -35,6 +35,12 @@ sail up -d
 # アプリケーションキーの作成
 sail artisan key:generate
 
+# asdfのインストール
+
+
+# nodejsのインストール
+
+
 # npm依存関係のインストール
 yarn
 # run: http://localhost
