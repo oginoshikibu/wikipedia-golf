@@ -35,6 +35,24 @@ sail up -d
 # アプリケーションキーの作成
 sail artisan key:generate
 
+# asdfのインストール
+brew install asdf
+# bash
+echo -e "\n. \"$(brew --prefix asdf)/libexec/asdf.sh\"" >> ~/.bashrc
+echo -e "\n. \"$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash\"" >> ~/.bashrc
+# zsh
+echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+exec $SHELL -l
+
+# デフォルトパッケージの作成
+touch ~/.default-npm-packages 
+echo -e "yarn\ntypescript\nts-node\ntypesync\nnpm-check-updates" >> ~/.default-npm-packages 
+
+# nodejsのインストール
+asdf plugin add nodejs
+asdf install nodejs latest
+asdf global nodejs latest
+
 # npm依存関係のインストール
 yarn
 # run: http://localhost
