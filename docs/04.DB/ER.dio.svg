@@ -1,275 +1,270 @@
-<mxfile host="65bd71144e">
-    <diagram id="cvi8OxHgbZEtnMlE8R3J" name="ページ1">
-        <mxGraphModel dx="783" dy="470" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" background="none" math="0" shadow="0">
-            <root>
-                <mxCell id="0"/>
-                <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="users" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" parent="1" vertex="1">
-                    <mxGeometry x="212" y="220" width="180" height="270" as="geometry">
-                        <mxRectangle x="212" y="220" width="70" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" parent="2" vertex="1">
-                    <mxGeometry y="30" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="4" value="PK" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;" parent="3" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="5" value="user_id" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;overflow=hidden;" parent="3" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="2" vertex="1">
-                    <mxGeometry y="60" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="7" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="6" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="8" value="user_name" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="6" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="9" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="2" vertex="1">
-                    <mxGeometry y="90" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="10" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="9" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="11" value="user_email" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="9" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="12" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="2" vertex="1">
-                    <mxGeometry y="120" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="13" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="12" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="14" value="user_email_verified_at " style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="12" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="23" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="2" vertex="1">
-                    <mxGeometry y="150" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="24" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="23" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="25" value="user_password" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="23" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="26" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="2" vertex="1">
-                    <mxGeometry y="180" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="27" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="26" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="28" value="remember_token" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="26" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="61" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="2" vertex="1">
-                    <mxGeometry y="210" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="62" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="61" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="63" value="created_at" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="61" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="58" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="2" vertex="1">
-                    <mxGeometry y="240" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="59" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="58" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="60" value="updated_at" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="58" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="15" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="1" vertex="1">
-                    <mxGeometry x="212" y="370" width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="17" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="1" vertex="1">
-                    <mxGeometry x="232" y="360" width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="29" value="answers" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" parent="1" vertex="1">
-                    <mxGeometry x="520" y="220" width="180" height="210" as="geometry"/>
-                </mxCell>
-                <mxCell id="30" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" parent="29" vertex="1">
-                    <mxGeometry y="30" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="31" value="PK" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;" parent="30" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="32" value="answer_id" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;overflow=hidden;" parent="30" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="33" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="29" vertex="1">
-                    <mxGeometry y="60" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="34" value="FK " style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="33" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="35" value="user_id" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="33" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="36" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="29" vertex="1">
-                    <mxGeometry y="90" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="37" value="FK" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="36" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="38" value="question_id" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="36" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="39" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="29" vertex="1">
-                    <mxGeometry y="120" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="40" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="39" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="41" value="strokes" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="39" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="55" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="29" vertex="1">
-                    <mxGeometry y="150" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="56" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="55" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="57" value="play_history" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="55" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="65" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="29" vertex="1">
-                    <mxGeometry y="180" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="66" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="65" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="67" value="created_at" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="65" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="80" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;startArrow=ERone;startFill=0;endArrow=ERzeroToMany;endFill=0;" edge="1" parent="1" source="42" target="65">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="610" y="470"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="42" value="questions" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" parent="1" vertex="1">
-                    <mxGeometry x="520" y="510" width="180" height="150" as="geometry"/>
-                </mxCell>
-                <mxCell id="43" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" parent="42" vertex="1">
-                    <mxGeometry y="30" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="44" value="PK" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;" parent="43" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="45" value="question_id" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;overflow=hidden;" parent="43" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="46" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="42" vertex="1">
-                    <mxGeometry y="60" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="47" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="46" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="48" value="start_page" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="46" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="49" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="42" vertex="1">
-                    <mxGeometry y="90" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="50" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="49" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="51" value="goal_page" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="49" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="68" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="42" vertex="1">
-                    <mxGeometry y="120" width="180" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="69" value="    &#10;" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" parent="68" vertex="1">
-                    <mxGeometry width="30" height="30" as="geometry">
-                        <mxRectangle width="30" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="70" value="created_at" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="68" vertex="1">
-                    <mxGeometry x="30" width="150" height="30" as="geometry">
-                        <mxRectangle width="150" height="30" as="alternateBounds"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="78" style="edgeStyle=none;html=1;startArrow=ERone;startFill=0;endArrow=ERzeroToMany;endFill=0;" edge="1" parent="1" source="6" target="33">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-            </root>
-        </mxGraphModel>
-    </diagram>
-</mxfile>
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="489px" height="441px" viewBox="-0.5 -0.5 489 441" content="&lt;mxfile&gt;&lt;diagram id=&quot;cvi8OxHgbZEtnMlE8R3J&quot; name=&quot;ページ1&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+    <defs>
+        <clipPath id="mx-clip-0-30-30-30-0">
+            <rect x="0" y="30" width="30" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-36-30-144-30-0">
+            <rect x="36" y="30" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-36-60-144-30-0">
+            <rect x="36" y="60" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-36-90-144-30-0">
+            <rect x="36" y="90" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-36-120-144-30-0">
+            <rect x="36" y="120" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-36-150-144-30-0">
+            <rect x="36" y="150" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-36-180-144-30-0">
+            <rect x="36" y="180" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-36-210-144-30-0">
+            <rect x="36" y="210" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-36-240-144-30-0">
+            <rect x="36" y="240" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-308-30-30-30-0">
+            <rect x="308" y="30" width="30" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-344-30-144-30-0">
+            <rect x="344" y="30" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-308-60-30-30-0">
+            <rect x="308" y="60" width="30" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-344-60-144-30-0">
+            <rect x="344" y="60" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-308-90-30-30-0">
+            <rect x="308" y="90" width="30" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-344-90-144-30-0">
+            <rect x="344" y="90" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-344-120-144-30-0">
+            <rect x="344" y="120" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-344-150-144-30-0">
+            <rect x="344" y="150" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-344-180-144-30-0">
+            <rect x="344" y="180" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-308-320-30-30-0">
+            <rect x="308" y="320" width="30" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-344-320-144-30-0">
+            <rect x="344" y="320" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-344-350-144-30-0">
+            <rect x="344" y="350" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-344-380-144-30-0">
+            <rect x="344" y="380" width="144" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-308-410-30-30-0">
+            <rect x="308" y="410" width="30" height="30"/>
+        </clipPath>
+        <clipPath id="mx-clip-344-410-144-30-0">
+            <rect x="344" y="410" width="144" height="30"/>
+        </clipPath>
+    </defs>
+    <g>
+        <path d="M 0 30 L 0 0 L 180 0 L 180 30" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 0 30 L 0 270 L 180 270 L 180 30" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 0 30 L 180 30" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 30 30 L 30 60 L 30 90 L 30 120 L 30 150 L 30 180 L 30 210 L 30 240 L 30 270" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+            <text x="89.5" y="19.5">
+                users
+            </text>
+        </g>
+        <path d="M 0 30 M 180 30 M 180 60 L 0 60" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 0 30 M 30 30 M 30 60 M 0 60" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" pointer-events="none" clip-path="url(#mx-clip-0-30-30-30-0)" text-anchor="middle" font-size="12px">
+            <text x="14.5" y="49.5">
+                PK
+            </text>
+        </g>
+        <path d="M 30 30 M 180 30 M 180 60 M 30 60" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-decoration="underline" pointer-events="none" clip-path="url(#mx-clip-36-30-144-30-0)" font-size="12px">
+            <text x="37.5" y="49.5">
+                user_id
+            </text>
+        </g>
+        <path d="M 0 60 M 30 60 M 30 90 M 0 90" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 30 60 M 180 60 M 180 90 M 30 90" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-36-60-144-30-0)" font-size="12px">
+            <text x="37.5" y="79.5">
+                user_name
+            </text>
+        </g>
+        <path d="M 0 90 M 30 90 M 30 120 M 0 120" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 30 90 M 180 90 M 180 120 M 30 120" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-36-90-144-30-0)" font-size="12px">
+            <text x="37.5" y="109.5">
+                user_email
+            </text>
+        </g>
+        <path d="M 0 120 M 30 120 M 30 150 M 0 150" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 30 120 M 180 120 M 180 150 M 30 150" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-36-120-144-30-0)" font-size="12px">
+            <text x="37.5" y="139.5">
+                user_email_verified_at
+            </text>
+        </g>
+        <path d="M 0 150 M 30 150 M 30 180 M 0 180" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 30 150 M 180 150 M 180 180 M 30 180" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-36-150-144-30-0)" font-size="12px">
+            <text x="37.5" y="169.5">
+                user_password
+            </text>
+        </g>
+        <path d="M 0 180 M 30 180 M 30 210 M 0 210" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 30 180 M 180 180 M 180 210 M 30 210" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-36-180-144-30-0)" font-size="12px">
+            <text x="37.5" y="199.5">
+                remember_token
+            </text>
+        </g>
+        <path d="M 0 210 M 30 210 M 30 240 M 0 240" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 30 210 M 180 210 M 180 240 M 30 240" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-36-210-144-30-0)" font-size="12px">
+            <text x="37.5" y="229.5">
+                created_at
+            </text>
+        </g>
+        <path d="M 0 240 M 30 240 M 30 270 M 0 270" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 30 240 M 180 240 M 180 270 M 30 270" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-36-240-144-30-0)" font-size="12px">
+            <text x="37.5" y="259.5">
+                updated_at
+            </text>
+        </g>
+        <path d="M 0 150 M 30 150 M 30 180 M 0 180" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 20 140 M 50 140 M 50 170 M 20 170" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 308 30 L 308 0 L 488 0 L 488 30" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 308 30 L 308 210 L 488 210 L 488 30" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 308 30 L 488 30" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 338 30 L 338 60 L 338 90 L 338 120 L 338 150 L 338 180 L 338 210" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+            <text x="397.5" y="19.5">
+                answers
+            </text>
+        </g>
+        <path d="M 308 30 M 488 30 M 488 60 L 308 60" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 308 30 M 338 30 M 338 60 M 308 60" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" pointer-events="none" clip-path="url(#mx-clip-308-30-30-30-0)" text-anchor="middle" font-size="12px">
+            <text x="322.5" y="49.5">
+                PK
+            </text>
+        </g>
+        <path d="M 338 30 M 488 30 M 488 60 M 338 60" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-decoration="underline" pointer-events="none" clip-path="url(#mx-clip-344-30-144-30-0)" font-size="12px">
+            <text x="345.5" y="49.5">
+                answer_id
+            </text>
+        </g>
+        <path d="M 308 60 M 338 60 M 338 90 M 308 90" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-308-60-30-30-0)" text-anchor="middle" font-size="12px">
+            <text x="322.5" y="79.5">
+                FK
+            </text>
+        </g>
+        <path d="M 338 60 M 488 60 M 488 90 M 338 90" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-344-60-144-30-0)" font-size="12px">
+            <text x="345.5" y="79.5">
+                user_id
+            </text>
+        </g>
+        <path d="M 308 90 M 338 90 M 338 120 M 308 120" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-308-90-30-30-0)" text-anchor="middle" font-size="12px">
+            <text x="322.5" y="109.5">
+                FK
+            </text>
+        </g>
+        <path d="M 338 90 M 488 90 M 488 120 M 338 120" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-344-90-144-30-0)" font-size="12px">
+            <text x="345.5" y="109.5">
+                question_id
+            </text>
+        </g>
+        <path d="M 308 120 M 338 120 M 338 150 M 308 150" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 338 120 M 488 120 M 488 150 M 338 150" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-344-120-144-30-0)" font-size="12px">
+            <text x="345.5" y="139.5">
+                strokes
+            </text>
+        </g>
+        <path d="M 308 150 M 338 150 M 338 180 M 308 180" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 338 150 M 488 150 M 488 180 M 338 180" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-344-150-144-30-0)" font-size="12px">
+            <text x="345.5" y="169.5">
+                play_history
+            </text>
+        </g>
+        <path d="M 308 180 M 338 180 M 338 210 M 308 210" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 338 180 M 488 180 M 488 210 M 338 210" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-344-180-144-30-0)" font-size="12px">
+            <text x="345.5" y="199.5">
+                created_at
+            </text>
+        </g>
+        <path d="M 398 290 L 398 260 Q 398 250 398 240 L 398 225.5" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 394 286 L 402 286" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <ellipse cx="398" cy="222" rx="3" ry="3" fill="none" stroke="#000000" pointer-events="none"/>
+        <path d="M 394 210 L 398 218 L 402 210 M 398 218 L 398 210" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 308 320 L 308 290 L 488 290 L 488 320" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 308 320 L 308 440 L 488 440 L 488 320" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 308 320 L 488 320" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 338 320 L 338 350 L 338 380 L 338 410 L 338 440" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+            <text x="397.5" y="309.5">
+                questions
+            </text>
+        </g>
+        <path d="M 308 320 M 488 320 M 488 350 L 308 350" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 308 320 M 338 320 M 338 350 M 308 350" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" pointer-events="none" clip-path="url(#mx-clip-308-320-30-30-0)" text-anchor="middle" font-size="12px">
+            <text x="322.5" y="339.5">
+                PK
+            </text>
+        </g>
+        <path d="M 338 320 M 488 320 M 488 350 M 338 350" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-decoration="underline" pointer-events="none" clip-path="url(#mx-clip-344-320-144-30-0)" font-size="12px">
+            <text x="345.5" y="339.5">
+                question_id
+            </text>
+        </g>
+        <path d="M 308 350 M 338 350 M 338 380 M 308 380" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 338 350 M 488 350 M 488 380 M 338 380" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-344-350-144-30-0)" font-size="12px">
+            <text x="345.5" y="369.5">
+                start_page
+            </text>
+        </g>
+        <path d="M 308 380 M 338 380 M 338 410 M 308 410" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 338 380 M 488 380 M 488 410 M 338 410" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-344-380-144-30-0)" font-size="12px">
+            <text x="345.5" y="399.5">
+                goal_page
+            </text>
+        </g>
+        <path d="M 308 410 M 338 410 M 338 440 M 308 440" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-308-410-30-30-0)" text-anchor="middle" font-size="12px"/>
+        <path d="M 338 410 M 488 410 M 488 440 M 338 440" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-344-410-144-30-0)" font-size="12px">
+            <text x="345.5" y="429.5">
+                created_at
+            </text>
+        </g>
+        <path d="M 180 75 L 292.5 75" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 184 71 L 184 79" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <ellipse cx="296" cy="75" rx="3" ry="3" fill="none" stroke="#000000" pointer-events="none"/>
+        <path d="M 308 71 L 300 75 L 308 79 M 300 75 L 308 75" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+    </g>
+</svg>
