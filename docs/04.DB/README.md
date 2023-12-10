@@ -1,5 +1,5 @@
 # DB
 
-![DFD図](DFD.dio.svg)
+![DFD図](DFD.drawio.svg)
 
-![ER図](ER.dio.svg)
+![ER図](ER.drawio.svg)
