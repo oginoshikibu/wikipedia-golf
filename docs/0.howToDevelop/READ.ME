@@ -1,1 +1,67 @@
 # 開発手順書
+
+## 新たな開発を始めるとき
+
+新たにタスクが割り振られ、開発を始めるときの手順書です。既に開発を進めているタスクがある場合は、[日々の開発手順](##日々の開発手順)へ進んでください。
+
+### 1. タスクの割り振り
+
+基本的にタスク管理は[github issues](https://github.com/oginoshikibu/wikipedia-golf/issues)で行います。気になったタスクがあれば@oginoshikibuに聞いてください。特になければ相談の上割り振ります。
+
+
+### 2. localでの作業
+
+基本的にVSCode上で全ての作業を行うと、楽なことが多いです。
+
+1. VSCodeを起動し、フォルダが開かれていない場合は最上部のファイル>最近使用した項目>wikipedia-golfを選択
+2. 下部にターミナルが開かれていない場合は`Ctrl + j`や、最上部のターミナル>新しいターミナルより開く
+3. ターミナル上で`git branch`を実行し、現在のブランチが`develop`であることを確認する
+   1. 異なる場合は`git switch develop`で移動
+4. `git pull origin develop`を実行し、最新にする
+5. `git switch -c <ブランチ名>`割り振られたタスクに適したブランチ名でブランチを作成し、移動
+6. リモートにブランチを生やすため、ファイル作成や一文字追加など微小な変更をして`push`
+   - `push`しない方法も勿論あるのですが、ちょっと特殊なのでこちらの方が簡単に済むと思います。
+   - `git`コマンド
+      1. `git add <file>`: `<file>`をステージングする。`.`など、ディレクトリ毎指定することも可能。
+      2. `git commit -m <commit message>`: `commit`する。`<commit message>`は適当でよいです。
+      3. `git push origin <現在のブランチ名>`: `push`する。ちゃんとブランチを切っていれば、基本的にコンフリクトは起きないと思います。
+
+#### ブランチ名について
+
+ブランチ名は **「見ただけで何をやっているかわかる」** が理想です。
+
+ルールとしては、`<開発種別>/<具体的な内容>`としてください。
+
+開発種別は
+
+- feat: 新規機能の開発（featureの略）
+- debag: デバッグ
+- refact: リファクタリング
+- fix: typoや軽微な修正
+- docs: ドキュメントの作成・変更
+- move: ファイルの移動や削除
+- build: ツールによるビルド
+
+辺りを予定しています。もし上記に当てはまらないものがあれば@oginoshikibuまで相談ください。
+
+### 3. ブラウザ上での作業
+
+[git hub](https://github.com/oginoshikibu/wikipedia-golf)を開いて`PR`(`Pull Request`)を出します。
+
+1. [git hub](https://github.com/oginoshikibu/wikipedia-golf)を開くと、上部に先ほど`push`したブランチ名が記載された以下のようなボタンが現れるのでクリック
+2. 以下各項目の設定をする
+   - `Description`欄に`Close #<issue番号>`を記載する。`#`を入力すると、サジェストが効きくので、`front`や`docs`など対象`issue`名に含まれる単語を打つのが早いと思います。
+   - `Reviewers`に@oginoshikibuを追加
+   - `Assignees`に自身を追加
+   - `Milestone`に`ベータ版開発`を追加
+3. 緑色ボタン`Create Pull Request`の右にある三角を押し、`Draft`を選択
+
+
+
+## 日々の開発手順
+
+
+`git`コマンド
+1. `git add <file>`: `<file>`をステージングする。`.`など、ディレクトリ毎指定することも可能。
+2. `git commit -m <commit message>`: `commit`する。`<commit message>`は適当でよいので、**出来るだけ`commit`の頻度を高くしてください。**
+3. `git push origin <現在のブランチ名>`: `push`する。ちゃんとブランチを切っていれば、基本的にコンフリクトは起きないと思います。
