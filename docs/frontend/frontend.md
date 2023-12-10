@@ -1,6 +1,6 @@
 # index page
 - How to Play ボタン
-  1. #How to play画面へ遷移
+  1. ゲームプレイ画面へ遷移し、How to playポップアップを表示
 - Log in ボタン
   1. #ログイン画面へ遷移
 - Play ボタン
