@@ -27,8 +27,14 @@
     1. [Check画面](#Check画面)へと遷移する。
   - Forgot your password? ボタン
     1. [Reset your password画面](#Reset-your-password画面)に遷移する。
+  
   - input_ Login-mail_pass-b
     1. 6文字以上255文字以下のパスワードを入力できる。
+    2. 256文字以上の入力はできない。
+    3. 空白（スペース）は文字数に数えない。
+    4. 半角英数字以外の文字の入力は受け入れない。
+  - input_User-name
+    1. 6文字以上255文字以下のユーザー名を入力できる。
     2. 256文字以上の入力はできない。
     3. 空白（スペース）は文字数に数えない。
     4. 半角英数字以外の文字の入力は受け入れない。
@@ -74,6 +80,7 @@
        4. on screen keyboard input only:  画面上のキーボードからだけの文字入力を許可する。
        5. report bug:  バグを報告する。
        6. questions(FAQ):  [FAQ画面](#FAQ画面)へ遷移する。
+  - log in済みの場合は、ユーザー名を表示
 
 # Reset your password画面
 - input_Forgot-pass
