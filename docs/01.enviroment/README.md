@@ -66,9 +66,9 @@ git --version   # 確認
 mkdir ~/.ssh
 cd ~/.ssh
 ssh-keygen -t ed25519 -f ed25519_github
-cat d25519_github.pub
+cat ed25519_github.pub
 > # 出力を https://github.com/settings/ssh/new に張り付ける
-echo -e "Host github.com\n\tHostName github.com\n\tIdentityFile ~/.ssh\n\ted25519_github\n\tUser git" >> ~/.ssh/config
+echo -e "Host github.com\n\tHostName github.com\n\tIdentityFile\n\t ~/.ssh/ed25519_github\n\tUser git" >> ~/.ssh/config
 ssh -T git@github.com   # 疎通確認
 > # githubのユーザー名が表示されれば成功
 ```
@@ -81,9 +81,6 @@ git --global config user.email
 ```
 
 リポジトリ毎に設定したい場合は、`clone`後リポジトリ内で上記コマンドの`--global`オプションを`--local`に変えて実行してください。
-
-
-### VScode
 
 ### Docker
 
@@ -130,20 +127,24 @@ docker version # 確認
 
 ## 2. Frontend
 
-Frontendは`docker`ではなく、（知識がないので）別途環境を作ります。
+Frontendは`docker`ではなく別途環境を作っています。
 
 ### asdf
 
-[公式ドキュメント](https://asdf-vm.com/guide/getting-started.html#_3-install-asdf)の「3. Install asdf」欄から自身の環境のものを選んで実行。（特に変更していない場合、`WSL`の場合は`Bash & Homebrew`、`Mac`の場合は`ZSH & Homebrew`）
 
 ```shell
 asdf --version  # 確認
+brew install asdf
 ```
+
+[公式ドキュメント](https://asdf-vm.com/guide/getting-started.html#_3-install-asdf)の「3. Install asdf」欄から自身の環境のものを選んで、pathを通す。（特に変更していない場合、`WSL`の場合は`Bash & Homebrew`、`Mac`の場合は`ZSH & Homebrew`）
+
 
 ### Node
 
 ```shell
-echo -e "yarn\ntypescript\nts-node\ntypesync\nnpm-check-updates" >> ~/.default-npm-packages    # nodeのデフォルトパッケージの指定
+echo -e "yarn\nnpm-check-updates" >> ~/.default-npm-packages    # nodeのデフォルトパッケージの指定
+exec $SHELL -l
 asdf plugin add nodejs
 asdf install nodejs latest
 asdf global nodejs latest
@@ -171,10 +172,12 @@ docker run --rm \
     composer install --ignore-platform-reqs
 
 # コンテナの起動
-# alias sail="./vendor/bin/sail"
+echo "alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'" >> ~/.bashrc
+exec $SHELL -l
 sail up -d
 # アプリケーションキーの作成
 sail artisan key:generate
+sail artisan migrate
 
 # npm依存関係のインストール
 yarn
