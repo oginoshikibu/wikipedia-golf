@@ -66,9 +66,9 @@ git --version   # 確認
 mkdir ~/.ssh
 cd ~/.ssh
 ssh-keygen -t ed25519 -f ed25519_github
-cat d25519_github.pub
+cat ed25519_github.pub
 > # 出力を https://github.com/settings/ssh/new に張り付ける
-echo -e "Host github.com\n\tHostName github.com\n\tIdentityFile ~/.ssh\n\ted25519_github\n\tUser git" >> ~/.ssh/config
+echo -e "Host github.com\n\tHostName github.com\n\tIdentityFile\n\t ~/.ssh/ed25519_github\n\tUser git" >> ~/.ssh/config
 ssh -T git@github.com   # 疎通確認
 > # githubのユーザー名が表示されれば成功
 ```
