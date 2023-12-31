@@ -16,7 +16,29 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function(){
+    return Inertia::render('Index');
+});
+
+Route::get('/play',function(){
+    return Inertia::render('Play');
+});
+
+Route::get('/loginregistar',function(){
+    return Inertia::render('Login');
+});
+
+Route::get('/confirm',function(){
+    return Inertia::render('ConfirmEmail');
+});
+
+Route::get('/reset',function(){
+    return Inertia::render('ResetPassword');
+});
+
+/* breeze routes */
+
+Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
