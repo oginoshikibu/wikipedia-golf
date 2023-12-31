@@ -135,6 +135,7 @@ Frontendは`docker`ではなく、（知識がないので）別途環境を作�
 
 ```shell
 asdf --version  # 確認
+brew install asdf
 ```
 
 ### Node
