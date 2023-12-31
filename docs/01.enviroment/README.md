@@ -143,7 +143,8 @@ brew install asdf
 ### Node
 
 ```shell
-echo -e "yarn\ntypescript\nts-node\ntypesync\nnpm-check-updates" >> ~/.default-npm-packages    # nodeのデフォルトパッケージの指定
+echo -e "yarn\nnpm-check-updates" >> ~/.default-npm-packages    # nodeのデフォルトパッケージの指定
+exec $SHELL -l
 asdf plugin add nodejs
 asdf install nodejs latest
 asdf global nodejs latest
