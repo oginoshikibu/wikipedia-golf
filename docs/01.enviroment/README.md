@@ -131,12 +131,14 @@ Frontendは`docker`ではなく、（知識がないので）別途環境を作�
 
 ### asdf
 
-[公式ドキュメント](https://asdf-vm.com/guide/getting-started.html#_3-install-asdf)の「3. Install asdf」欄から自身の環境のものを選んで実行。（特に変更していない場合、`WSL`の場合は`Bash & Homebrew`、`Mac`の場合は`ZSH & Homebrew`）
 
 ```shell
 asdf --version  # 確認
 brew install asdf
 ```
+
+[公式ドキュメント](https://asdf-vm.com/guide/getting-started.html#_3-install-asdf)の「3. Install asdf」欄から自身の環境のものを選んで、pathを通す。（特に変更していない場合、`WSL`の場合は`Bash & Homebrew`、`Mac`の場合は`ZSH & Homebrew`）
+
 
 ### Node
 
