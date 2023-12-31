@@ -171,7 +171,8 @@ docker run --rm \
     composer install --ignore-platform-reqs
 
 # コンテナの起動
-# alias sail="./vendor/bin/sail"
+echo "alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'" >> ~/.bashrc
+exec $SHELL -l
 sail up -d
 # アプリケーションキーの作成
 sail artisan key:generate
