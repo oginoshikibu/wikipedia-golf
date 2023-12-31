@@ -176,6 +176,7 @@ exec $SHELL -l
 sail up -d
 # アプリケーションキーの作成
 sail artisan key:generate
+sail artisan migrate
 
 # npm依存関係のインストール
 yarn
