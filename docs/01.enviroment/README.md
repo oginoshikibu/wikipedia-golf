@@ -127,7 +127,7 @@ docker version # 確認
 
 ## 2. Frontend
 
-Frontendは`docker`ではなく、（知識がないので）別途環境を作ります。
+Frontendは`docker`ではなく別途環境を作っています。
 
 ### asdf
 
