@@ -82,9 +82,6 @@ git --global config user.email
 
 リポジトリ毎に設定したい場合は、`clone`後リポジトリ内で上記コマンドの`--global`オプションを`--local`に変えて実行してください。
 
-
-### VScode
-
 ### Docker
 
 #### install
