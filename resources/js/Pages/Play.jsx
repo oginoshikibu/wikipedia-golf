@@ -1,16 +1,21 @@
+import React, { useState } from 'react';
 import { Head } from '@inertiajs/react';
+import PrimaryButton from '@/Components/PrimaryButton';
+import Iframe from '@/Components/Iframe';
 
 // todo
 // iframe をコンポーネントで作成する
 // ヘッダーを作成する
 
 export default function Play() {
+
+    const [src, setSrc] = useState("https://ja.wikipedia.org/wiki/%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0");
+
     return (
         <>
             <Head title="Play" />
-            <div className="mt-4">
-                <iframe src="https://ja.wikipedia.org/wiki/%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0" width="100%" height="1000px"></iframe>
-            </div>
+            <PrimaryButton onClick={() => setSrc("https://ja.wikipedia.org/wiki/%E3%82%B2%E3%83%BC%E3%83%A0")}>ゲーム</PrimaryButton>
+            <Iframe src={src} className="mt-4" width="100%" height="1000px" />
         </>
     );
 }
