@@ -1,5 +1,9 @@
 import { Head } from '@inertiajs/react';
 
+// todo
+// iframe をコンポーネントで作成する
+// ヘッダーを作成する
+
 export default function Play() {
     return (
         <>
