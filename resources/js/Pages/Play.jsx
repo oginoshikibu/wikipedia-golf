@@ -35,7 +35,7 @@ export default function Play() {
                 <PrimaryButton>shot!!!</PrimaryButton>
             </form>
             
-            <Iframe src={src} className="mt-4" width="100%" height="1000px" />
+            <Iframe src={src} className="mt-4 pointer-events-none" width="100%" height="1000px" tabIndex={-1}/>
         </>
     );
 }
