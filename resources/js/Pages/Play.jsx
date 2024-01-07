@@ -17,6 +17,8 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
         // debag mock用
         links.add(goalUrl);
         links.add("https://ja.wikipedia.org/wiki/テニス");
+        links.add("https://ja.wikipedia.org/wiki/サッカー");
+        links.add("https://ja.wikipedia.org/wiki/野球");
         return links;
     }
 
