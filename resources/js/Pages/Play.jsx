@@ -31,10 +31,11 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
 
 
     const [src, setSrc] = useState(startUrl);
+    const [currentStrokes, setCurrentStrokes] = useState(0);
 
     useEffect(() => {
         if (src === goalUrl) {
-            alert("ゴールしました");
+            alert(currentStrokes + "打でゴールしました");
         }
     }, [src]);
 
@@ -43,6 +44,7 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
         const nextWikiUrl = ("https://ja.wikipedia.org/wiki/" + e.target.shot.value);
         if (canShot(src, nextWikiUrl)) {
             setSrc(nextWikiUrl);
+            setCurrentStrokes(currentStrokes + 1);
         } else if (nextWikiUrl === src) {
             alert("同じページです");
         } else {
@@ -55,7 +57,10 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
         <>
 
             <Head title="Play" />
-            <div className='text-center w-[100%] m-3'>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</div>
+            <div className='text-center w-[100%] m-3'>
+                <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
+                <p>現在の打数: {currentStrokes} 打</p>
+            </div>
             <form onSubmit={shot} className='flex items-center m-3'>
                 <TextInput
                     id="shot"
