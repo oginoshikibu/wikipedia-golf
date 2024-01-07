@@ -13,9 +13,9 @@ export default function Play({startUrl="",goalUrl=""}) {
     const getAllLinks = (wikiUrl) => {
         // media wiki apiを叩いて、wikiUrlのページのリンクを取得する
         // https://www.mediawiki.org/wiki/API:Main_page
-        const links = Set();
+        const links = new Set();
         return links;
-    };
+    }
 
     const canShot = (currentWikiUrl,nextWikiUrl) => {
         // currentWikiUrlからnextWikiUrlに移動できるかどうかを判定する
@@ -37,11 +37,10 @@ export default function Play({startUrl="",goalUrl=""}) {
         } else {
             alert("そのリンクは無効です");
         }
-
         if (src === goalUrl){
             alert("ゴールです！");
         }
-    };
+    }
 
     return (
         <>
@@ -55,7 +54,6 @@ export default function Play({startUrl="",goalUrl=""}) {
                     name="shot"
                     className="block w-[100%] mr-3"
                     autoComplete="shot"
-                    onChange={(e) => shot(e.target.value)}
                 />
                 <PrimaryButton className=''>shot!!!</PrimaryButton>
             </form>
