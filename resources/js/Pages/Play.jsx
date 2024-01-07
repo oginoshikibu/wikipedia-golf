@@ -17,6 +17,15 @@ export default function Play({startUrl="",goalUrl=""}) {
         return links;
     };
 
+    const canShot = (currentWikiUrl,nextWikiUrl) => {
+        // currentWikiUrlからnextWikiUrlに移動できるかどうかを判定する
+        // 1. currentWikiUrlのページのリンクを取得する
+        // 2. nextWikiUrlがそのリンクの中にあるかどうかを判定する
+        // 3. あればtrue,なければfalseを返す
+        const links = getAllLinks(currentWikiUrl);
+        return links.has(nextWikiUrl);
+    }
+
 
     const [src, setSrc] = useState(startUrl);
 
