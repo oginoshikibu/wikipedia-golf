@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Head } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
-import Iframe from '@/Components/Iframe';
 import TextInput from '@/Components/TextInput';
 
 // todo
@@ -35,7 +34,9 @@ export default function Play() {
                 <PrimaryButton>shot!!!</PrimaryButton>
             </form>
             
-            <iframe src={src} className="mt-4 pointer-events-none" width="100%" height="1000px" tabIndex={-1}/>
+            <div className='overflow-auto h-[1000px]'>
+                <iframe src={src} className="mt-4 pointer-events-none" width="100%" height="300000px" tabIndex={-1}/>
+            </div>
         </>
     );
 }
