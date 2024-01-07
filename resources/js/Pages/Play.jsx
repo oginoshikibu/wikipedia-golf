@@ -7,9 +7,13 @@ import TextInput from '@/Components/TextInput';
 // iframe をコンポーネントで作成する
 // ヘッダーを作成する
 
-export default function Play() {
+export default function Play({startUrl="",goalUrl=""}) {
 
-    const [src, setSrc] = useState("https://ja.wikipedia.org/wiki/%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0");
+    // mock default value
+    if (startUrl === ""){startUrl = "https://ja.wikipedia.org/wiki/play"}
+    if (goalUrl === ""){goalUrl = "https://ja.wikipedia.org/wiki/golf"}
+
+    const [src, setSrc] = useState(startUrl);
 
     const shot = (e) => {
         e.preventDefault();
