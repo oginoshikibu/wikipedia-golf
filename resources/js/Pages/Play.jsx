@@ -44,15 +44,14 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
     const shot = (e) => {
         e.preventDefault();
         const nextWikiUrl = ("https://ja.wikipedia.org/wiki/" + e.target.shot.value);
-        if (canShot(src, nextWikiUrl)) {
+        if (nextWikiUrl === src) {
+            alert("同じページです");
+        } else if (canShot(src, nextWikiUrl)) {
             setSrc(nextWikiUrl);
             setCurrentStrokes(currentStrokes + 1);
-        } else if (nextWikiUrl === src) {
-            alert("同じページです");
         } else {
             alert("そのページには移動できません");
         }
-
     }
 
     return (
