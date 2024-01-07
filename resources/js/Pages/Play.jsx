@@ -3,11 +3,11 @@ import { Head } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 
-export default function Play({ startUrl = "", goalUrl = "" }) {
+export default function Play({ const: startPageTitle = "ゲーム", const: goalPageTitle = "ゴルフ" }) {
 
     // mock default value
-    if (startUrl === "") { startUrl = "https://ja.wikipedia.org/wiki/ゲーム" }
-    if (goalUrl === "") { goalUrl = "https://ja.wikipedia.org/wiki/ゴルフ" }
+    const startUrl = "https://ja.wikipedia.org/wiki/" + startPageTitle;
+    const goalUrl = "https://ja.wikipedia.org/wiki/" + goalPageTitle;
 
 
     const getAllLinks = (wikiUrl) => {
@@ -55,7 +55,7 @@ export default function Play({ startUrl = "", goalUrl = "" }) {
         <>
 
             <Head title="Play" />
-
+            <div className='text-center w-[100%] m-3'>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</div>
             <form onSubmit={shot} className='flex items-center m-3'>
                 <TextInput
                     id="shot"
