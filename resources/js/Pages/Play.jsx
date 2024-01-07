@@ -3,15 +3,20 @@ import { Head } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 
-// todo
-// iframe をコンポーネントで作成する
-// ヘッダーを作成する
-
 export default function Play({startUrl="",goalUrl=""}) {
 
     // mock default value
     if (startUrl === ""){startUrl = "https://ja.wikipedia.org/wiki/play"}
     if (goalUrl === ""){goalUrl = "https://ja.wikipedia.org/wiki/golf"}
+
+
+    const getAllLinks = (wikiUrl) => {
+        // media wiki apiを叩いて、wikiUrlのページのリンクを取得する
+        // https://www.mediawiki.org/wiki/API:Main_page
+        const links = Set();
+        return links;
+    };
+
 
     const [src, setSrc] = useState(startUrl);
 
