@@ -22,20 +22,20 @@ export default function Play() {
 
             <Head title="Play" />
 
-            <form onSubmit={shot}>
+            <form onSubmit={shot} className='flex items-center m-3'>
                 <TextInput
                     id="shot"
                     type="text"
                     name="shot"
-                    className="mt-1 block w-full"
+                    className="block w-[100%] mr-3"
                     autoComplete="shot"
                     onChange={(e) => shot(e.target.value)}
                 />
-                <PrimaryButton>shot!!!</PrimaryButton>
+                <PrimaryButton className=''>shot!!!</PrimaryButton>
             </form>
             
-            <div className='overflow-auto h-[1000px]'>
-                <iframe src={src} className="mt-4 pointer-events-none" width="100%" height="300000px" tabIndex={-1}/>
+            <div className='overflow-auto h-[2000px] border-4 m-3'>
+                <iframe src={src} className="m-4 pointer-events-none" width="100%" height="300000px" tabIndex={-1}/>
             </div>
         </>
     );
