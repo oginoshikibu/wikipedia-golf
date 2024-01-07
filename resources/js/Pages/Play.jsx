@@ -37,12 +37,13 @@ export default function Play({startUrl="",goalUrl=""}) {
         const nextWikiUrl=("https://ja.wikipedia.org/wiki/" + e.target.shot.value);
         if (canShot(src,nextWikiUrl)){
             setSrc(nextWikiUrl);
+            if (src === goalUrl){
+                alert("ゴールです！");
+            }
         } else {
             alert("そのリンクは無効です");
         }
-        if (src === goalUrl){
-            alert("ゴールです！");
-        }
+
     }
 
     return (
