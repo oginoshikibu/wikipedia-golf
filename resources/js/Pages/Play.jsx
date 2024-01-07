@@ -3,11 +3,11 @@ import { Head } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 
-export default function Play({startUrl="",goalUrl=""}) {
+export default function Play({ startUrl = "", goalUrl = "" }) {
 
     // mock default value
-    if (startUrl === ""){startUrl = "https://ja.wikipedia.org/wiki/ゲーム"}
-    if (goalUrl === ""){goalUrl = "https://ja.wikipedia.org/wiki/ゴルフ"}
+    if (startUrl === "") { startUrl = "https://ja.wikipedia.org/wiki/ゲーム" }
+    if (goalUrl === "") { goalUrl = "https://ja.wikipedia.org/wiki/ゴルフ" }
 
 
     const getAllLinks = (wikiUrl) => {
@@ -20,7 +20,7 @@ export default function Play({startUrl="",goalUrl=""}) {
         return links;
     }
 
-    const canShot = (currentWikiUrl,nextWikiUrl) => {
+    const canShot = (currentWikiUrl, nextWikiUrl) => {
         // currentWikiUrlからnextWikiUrlに移動できるかどうかを判定する
         // 1. currentWikiUrlのページのリンクを取得する
         // 2. nextWikiUrlがそのリンクの中にあるかどうかを判定する
@@ -34,10 +34,10 @@ export default function Play({startUrl="",goalUrl=""}) {
 
     const shot = (e) => {
         e.preventDefault();
-        const nextWikiUrl=("https://ja.wikipedia.org/wiki/" + e.target.shot.value);
-        if (canShot(src,nextWikiUrl)){
+        const nextWikiUrl = ("https://ja.wikipedia.org/wiki/" + e.target.shot.value);
+        if (canShot(src, nextWikiUrl)) {
             setSrc(nextWikiUrl);
-            if (src === goalUrl){
+            if (src === goalUrl) {
                 alert("ゴールです！");
             }
         } else {
@@ -59,11 +59,11 @@ export default function Play({startUrl="",goalUrl=""}) {
                     className="block w-[100%] mr-3"
                     autoComplete="shot"
                 />
-                <PrimaryButton className=''>shot!!!</PrimaryButton>
+                <PrimaryButton>shot!!!</PrimaryButton>
             </form>
-            
+
             <div className='overflow-auto h-[2000px] border-4 m-3'>
-                <iframe src={src} className="m-4 pointer-events-none" width="100%" height="300000px" tabIndex={-1}/>
+                <iframe src={src} className="m-4 pointer-events-none" width="100%" height="300000px" tabIndex={-1} />
             </div>
         </>
     );
