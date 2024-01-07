@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Head } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
@@ -32,14 +32,17 @@ export default function Play({ startUrl = "", goalUrl = "" }) {
 
     const [src, setSrc] = useState(startUrl);
 
+    useEffect(() => {
+        if (src === goalUrl) {
+            alert("ゴールしました");
+        }
+    }, [src]);
+
     const shot = (e) => {
         e.preventDefault();
         const nextWikiUrl = ("https://ja.wikipedia.org/wiki/" + e.target.shot.value);
         if (canShot(src, nextWikiUrl)) {
             setSrc(nextWikiUrl);
-            if (src === goalUrl) {
-                alert("ゴールです！");
-            }
         } else {
             alert("そのリンクは無効です");
         }
