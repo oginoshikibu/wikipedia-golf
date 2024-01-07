@@ -6,14 +6,17 @@ import TextInput from '@/Components/TextInput';
 export default function Play({startUrl="",goalUrl=""}) {
 
     // mock default value
-    if (startUrl === ""){startUrl = "https://ja.wikipedia.org/wiki/play"}
-    if (goalUrl === ""){goalUrl = "https://ja.wikipedia.org/wiki/golf"}
+    if (startUrl === ""){startUrl = "https://ja.wikipedia.org/wiki/ゲーム"}
+    if (goalUrl === ""){goalUrl = "https://ja.wikipedia.org/wiki/ゴルフ"}
 
 
     const getAllLinks = (wikiUrl) => {
         // media wiki apiを叩いて、wikiUrlのページのリンクを取得する
         // https://www.mediawiki.org/wiki/API:Main_page
         const links = new Set();
+        // debag mock用
+        links.add(goalUrl);
+        links.add("https://ja.wikipedia.org/wiki/テニス");
         return links;
     }
 
