@@ -6,21 +6,21 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
     // https://www.mediawiki.org/wiki/API:REST_API/Reference/ja#HTMLの取得 よりコピペしたものを改変
     const wikiFetch = async (title) => {
         let url = `https://en.wikipedia.org/w/rest.php/v1/page/${title}/html`;
-        let headers = {'Api-User-Agent': 'MediaWiki REST API docs examples/0.1 (https://www.mediawiki.org/wiki/API_talk:REST_API)'}
+        let headers = { 'Api-User-Agent': 'MediaWiki REST API docs examples/0.1 (https://www.mediawiki.org/wiki/API_talk:REST_API)' }
         const rsp = await fetch(url, headers);
         const data = await rsp.json();
         return data;
-      }
-    
+    }
+
     const wikiFetchAsync = async (title) => {
         try {
             let result = await wikiFetch(title);
             console.log(result);
-        } catch( err ) {
-            console.error( err.message );
+        } catch (err) {
+            console.error(err.message);
         }
     }
-    
+
     const modifyHtmlLinks = (html) => {
         // htmlの中のリンクを変更する
         // 1. htmlをパースする
@@ -41,7 +41,6 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
     const [currentPage, setCurrentPage] = useState(getWikiPage(startPageTitle));
     const [currentStrokes, setCurrentStrokes] = useState(0);
 
-    
     const onLinkClickToHit = (e) => {
         setCurrentStrokes(currentStrokes + 1);
         setCurrentPage(getWikiPage(e.target.title));
