@@ -9,6 +9,29 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
     const startUrl = "https://ja.wikipedia.org/wiki/" + startPageTitle;
     const goalUrl = "https://ja.wikipedia.org/wiki/" + goalPageTitle;
 
+    // https://www.mediawiki.org/wiki/API:REST_API/Reference/ja#HTMLの取得 よりコピペ
+    async function wikiFetch(title) {
+        let url = `https://en.wikipedia.org/w/rest.php/v1/page/${title}/html`;
+        let headers = {'Api-User-Agent': 'MediaWiki REST API docs examples/0.1 (https://www.mediawiki.org/wiki/API_talk:REST_API)'}
+        
+      
+        const rsp = await fetch(url, headers);
+        const data = await rsp.json();
+        return data;
+      }
+      
+      async function fetchAsync()
+      {
+        try {
+          let result = await doFetch();
+          console.log(result);
+        } catch( err ) {
+          console.error( err.message );
+        }
+      }
+      
+      fetchAsync();
+
 
     const getAllLinks = (wikiUrl) => {
         // media wiki apiを叩いて、wikiUrlのページのリンクを取得する
