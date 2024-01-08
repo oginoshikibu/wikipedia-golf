@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Head } from '@inertiajs/react';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 
 export default function Play({ const: startPageTitle = "ゲーム", const: goalPageTitle = "ゴルフ" }) {
 
@@ -63,13 +61,12 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
 
     return (
         <>
-
             <Head title="Play" />
             <div className='text-center w-[100%] m-3'>
                 <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
                 <p>現在の打数: {currentStrokes} 打</p>
             </div>
-            <iframe srcDoc={currentPage.html} className="m-4" width="100%" height="300000px" tabIndex={-1} />
+            <iframe srcDoc={currentPage.html} className="m-4" width="100%" tabIndex={-1} />
         </>
     );
 }
