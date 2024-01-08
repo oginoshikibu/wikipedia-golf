@@ -32,6 +32,24 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
       
       fetchAsync();
 
+    
+    const modifyHtmlLinks = (html) => {
+        // htmlの中のリンクを変更する
+        // 1. htmlをパースする
+        // 2. リンクのhrefを変更する
+        // 3. 変更したhtmlを返す
+        return html;
+    }
+
+    const getWikiPage = async (title) => {
+        // media wiki apiを叩いて、titleのページのhtmlを取得する
+        // https://www.mediawiki.org/wiki/API:Main_page
+        const page = new Object();
+        page.title = title;
+        page.html = modifyHtmlLinks(await wikiFetch(title));
+        return page;
+    }
+
 
     const getAllLinks = (wikiUrl) => {
         // media wiki apiを叩いて、wikiUrlのページのリンクを取得する
