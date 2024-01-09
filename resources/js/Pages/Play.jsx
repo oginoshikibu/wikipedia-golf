@@ -5,7 +5,7 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
 
     // https://www.mediawiki.org/wiki/API:REST_API/Reference/ja#HTMLの取得 よりコピペしたものを改変
     const wikiFetch = async (title) => {
-        let url = `https://en.wikipedia.org/w/rest.php/v1/page/${title}/html`;
+        let url = encodeURI(`https://ja.wikipedia.org/w/rest.php/v1/page/${title}/with_html`);
         let headers = { 'Api-User-Agent': 'MediaWiki REST API docs examples/0.1 (https://www.mediawiki.org/wiki/API_talk:REST_API)' }
         const rsp = await fetch(url, headers);
         const data = await rsp.json();
@@ -15,7 +15,7 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
     const wikiFetchAsync = async (title) => {
         try {
             let result = await wikiFetch(title);
-            console.log(result);
+            return result;
         } catch (err) {
             console.error(err.message);
         }
@@ -34,20 +34,30 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
         // https://www.mediawiki.org/wiki/API:Main_page
         const page = new Object();
         page.title = title;
-        page.html = modifyHtmlLinks(wikiFetchAsync(title));
+        page.html = modifyHtmlLinks((await wikiFetchAsync(title)).html);
         return page;
     }
 
-    const [currentPage, setCurrentPage] = useState(getWikiPage(startPageTitle));
+    const [currentPage, setCurrentPage] = useState(null);
     const [currentStrokes, setCurrentStrokes] = useState(0);
 
-    const onLinkClickToHit = (e) => {
+    useEffect(() => {
+        const fetchData = async () => {
+            const page = await getWikiPage(startPageTitle);
+            setCurrentPage(page);
+        };
+
+        fetchData();
+    }, [startPageTitle]);
+
+    const onLinkClickToHit = async (e) => {
         setCurrentStrokes(currentStrokes + 1);
-        setCurrentPage(getWikiPage(e.target.title));
+        const page = await getWikiPage(e.target.title);
+        setCurrentPage(page);
     }
 
     useEffect(() => {
-        if (currentPage.title === goalPageTitle) {
+        if (currentPage && currentPage.title === goalPageTitle) {
             alert(currentStrokes + "打でゴールしました");
         }
     }, [currentPage]);
@@ -60,7 +70,12 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
                 <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
                 <p>現在の打数: {currentStrokes} 打</p>
             </div>
-            <iframe srcDoc={currentPage.html} className="m-4" width="100%" tabIndex={-1} />
+            {currentPage && (
+                <>
+                    <div>{currentPage.title}</div>
+                    <iframe srcDoc={currentPage.html} className="m-4" width="100%" tabIndex={-1} />
+                </>
+            )}
         </>
     );
 }
