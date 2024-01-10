@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Head } from '@inertiajs/react';
-
+import parse, {domToReact} from 'html-react-parser';
 
 export default function Play({ const: startPageTitle = "ゲーム", const: goalPageTitle = "ゴルフ" }) {
 
@@ -20,6 +20,32 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
         }
     }
     
+    const onClickWikiLink = (text, href) => {
+        alert(text, href);
+    }
+    
+    const updateLinksToPopups = (html) => {
+
+        const replace  = (node) => {
+            if (node.name === 'a') {
+                    
+                return (
+                    <a {...node.attribs} href="#" title="hoge" onClick={(e) => {
+                        e.preventDefault();
+                        onClickWikiLink(validChildren.join(''), node.href);
+                    }}>
+                        {domToReact(node.children, replace)}
+                    </a>
+                );}
+            else if (node.children) {
+                return <>{domToReact(node.children, replace)}</>;
+            }
+
+            return;
+        }
+        
+        return parse(html, replace);
+    };
     
     const [currentPageHtml, setCurrentPageHtml] = useState(null);
     const [currentPageTitle, setCurrentPageTitle] = useState(null);
@@ -28,7 +54,8 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
 
     const updateCurrentPage = async (title) => {
         let result = await wikiFetchAsync(title);
-        setCurrentPageHtml(result.html);
+        let updatedHtml = updateLinksToPopups(result.html);
+        setCurrentPageHtml(updatedHtml);
         setCurrentPageTitle(result.title);
         setCurrentScore(currentScore + 1);
     }
@@ -54,12 +81,10 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
                 <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
                 <p>現在の打数: {currentScore} 打</p>
             </div>
-            {currentPageTitle && (
-                <>
-                    <div>{currentPageTitle}</div>
-                    <iframe srcDoc={currentPageHtml} title={currentPageTitle} className="m-4" width="100%" height={100000} tabIndex={-1} />
-                </>
-            )}
+
+            <div className='w-[80%]'>
+                {currentPageHtml}
+            </div>
         </>
     );
 }
