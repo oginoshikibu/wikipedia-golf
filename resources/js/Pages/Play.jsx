@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Head } from '@inertiajs/react';
-import parse, {domToReact} from 'html-react-parser';
+import parse, { domToReact } from 'html-react-parser';
 
 export default function Play({ const: startPageTitle = "ゲーム", const: goalPageTitle = "ゴルフ" }) {
 
@@ -19,34 +19,41 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
             console.error(err.message);
         }
     }
-    
+
     const onClickWikiLink = (text, href) => {
         alert(text, href);
     }
-    
+
     const updateLinksToPopups = (html) => {
 
-        const replace  = (node) => {
-            if (node.name === 'a') {
-                    
-                return (
-                    <a {...node.attribs} href="#" title="hoge" onClick={(e) => {
-                        e.preventDefault();
-                        onClickWikiLink(validChildren.join(''), node.href);
-                    }}>
-                        {domToReact(node.children, replace)}
-                    </a>
-                );}
-            else if (node.children) {
-                return <>{domToReact(node.children, replace)}</>;
-            }
 
-            return;
+        const options = {
+            replace: ({ attribs, children, parent }) => {
+                if (!attribs || !attribs.href) return;
+
+                // class属性をclassNameに変更
+                if (attribs.class) {
+                    attribs.className = attribs.class;
+                    delete attribs.class;
+                }
+
+                // aタグの場合
+                if (attribs.href && parent && parent.name !== 'head') {
+                    return React.createElement('a', {
+                        ...attribs,
+                        onClick: (e) => {
+                            e.preventDefault();
+                            console.log(attribs)
+                            onClickWikiLink(children[0].data, attribs.href);
+                        }
+                    }, domToReact(children, options));
+
+                }
+            }
         }
-        
-        return parse(html, replace);
-    };
-    
+        return parse(html, options);
+    }
+
     const [currentPageHtml, setCurrentPageHtml] = useState(null);
     const [currentPageTitle, setCurrentPageTitle] = useState(null);
     const [currentScore, setCurrentScore] = useState(0);
