@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from 'react';
+import parse, { domToReact } from 'html-react-parser';
 
-
-export default function wikiPageViewer({jaPageTitle}){
+export default function wikiPageViewer({ jaPageTitle }) {
 
     const wikiFetch = async (title) => {
         let url = encodeURI(`https://ja.wikipedia.org/w/rest.php/v1/page/${title}/with_html`);
@@ -46,7 +47,7 @@ export default function wikiPageViewer({jaPageTitle}){
         return parse(html, options);
     }
 
-    return(
+    return (
         <>
             {updateLinksToPopups(wikiFetchAsync(title))}
         </>
