@@ -37,7 +37,7 @@ export default function wikiPageViewer(jaPageTitle) {
 
     const updateLinksToPopups = (html, flag) => {
         const options = {
-            replace: ({ attribs, children, parent }) => {
+            replace: ({ attribs, children, name, parent }) => {
                 if (!attribs || !attribs.href) return;
 
                 // class属性をclassNameに変更
@@ -45,14 +45,16 @@ export default function wikiPageViewer(jaPageTitle) {
                     attribs.className = attribs.class;
                     delete attribs.class;
                 }
-
-                // style属性が存在する場合
-                if (attribs.style) {
+                // style属性が存在し、それが文字列である場合
+                if (attribs.style && typeof attribs.style === 'string') {
                     // style属性をオブジェクトに変換
                     const styleObject = attribs.style.split(';').reduce((obj, styleDeclaration) => {
                         const parts = styleDeclaration.split(':');
                         if (parts[0] && parts[1]) {
-                            obj[parts[0].trim()] = parts[1].trim();
+                            let property = parts[0].trim();
+                            // CSSプロパティをcamelCaseに変換
+                            property = property.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+                            obj[property] = parts[1].trim();
                         }
                         return obj;
                     }, {});
@@ -62,12 +64,6 @@ export default function wikiPageViewer(jaPageTitle) {
                 // aタグの場合
                 if (attribs.href && parent && parent.name !== 'head') {
                     attribs.href = 'https://ja.wikipedia.org';
-
-                    // console.log(attribs,"attribs");
-                    // console.log(children,"children");
-                    // console.log(parent,"parent");
-                    // console.log(domToReact(children, options),"domToReact(children, options)");
-                    // return;
 
                     return (
                         <a
