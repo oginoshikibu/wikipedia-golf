@@ -33,7 +33,7 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
                 <Head title="Play" />
                 <div className='text-center m-3'>
                     <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
-                    <p>現在の打数: {currentScore} 打</p>
+                    <p>現在のページ: {currentPageTitle}, 現在の打数: {currentScore} 打</p>
                 </div>
 
                 <div className='flex justify-center m-3'>
