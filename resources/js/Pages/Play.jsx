@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Head } from '@inertiajs/react';
 import wikiPageViewer from '@/Components/wikiPageViewer';
+import ErrorBoundary from '@/Components/ErrorBoundary';
 
 export default function Play({ const: startPageTitle = "ゲーム", const: goalPageTitle = "ゴルフ" }) {
 
@@ -27,16 +28,18 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
     }, [currentPageTitle]);
 
     return (
-        <>
-            <Head title="Play" />
-            <div className='text-center w-[100%] m-3'>
-                <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
-                <p>現在の打数: {currentScore} 打</p>
-            </div>
+        <ErrorBoundary>
+            <>
+                <Head title="Play" />
+                <div className='text-center w-[100%] m-3'>
+                    <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
+                    <p>現在の打数: {currentScore} 打</p>
+                </div>
 
-            <div className='w-[80%]'>
-                {wikiPageViewer(currentPageTitle)}
-            </div>
-        </>
+                <div className='flex justify-center w-[100%]'>
+                    {wikiPageViewer(currentPageTitle)}
+                </div>
+            </>
+        </ErrorBoundary>
     );
 }
