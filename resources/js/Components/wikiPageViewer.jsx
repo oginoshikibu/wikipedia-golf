@@ -63,19 +63,34 @@ export default function wikiPageViewer(jaPageTitle) {
 
                 // aタグの場合
                 if (attribs.href && parent && parent.name !== 'head') {
-                    attribs.href = 'https://ja.wikipedia.org';
+                    // 一階層下のリンクのみを対象にする ex. ./hoge
+                    const isChildLink = attribs.href.match(/^\.\/[^\/]*$/);
 
-                    return (
-                        <a
-                            {...attribs}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                console.log(attribs);
-                            }}
-                        >
-                            {domToReact(children, options)}
-                        </a>
-                    );
+                    if (isChildLink) {
+                        return (
+                            <a
+                                {...attribs}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    console.log("有効リンク");
+                                }}
+                            >
+                                {domToReact(children, options)}
+                            </a>
+                        );
+                    } else {
+                        return (
+                            <a
+                                {...attribs}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    console.log("無効リンク");
+                                }}
+                            >
+                                {domToReact(children, options)}
+                            </a >
+                        );
+                    }
                 }
             }
         }
