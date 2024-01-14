@@ -6,7 +6,7 @@ import ErrorBoundary from '@/Components/ErrorBoundary';
 export default function Play({ const: startPageTitle = "ゲーム", const: goalPageTitle = "ゴルフ" }) {
 
     const [currentPageTitle, setCurrentPageTitle] = useState(null);
-    const [currentScore, setCurrentScore] = useState(0);
+    const [currentScore, setCurrentScore] = useState(-1);
 
 
     const updateCurrentPage = async (title) => {
