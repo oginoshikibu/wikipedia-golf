@@ -74,6 +74,7 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
                                     e.preventDefault();
                                     const nextPageTitle = attribs.href.replace('./', '');
                                     updateCurrentPage(nextPageTitle);
+                                    window.scrollTo({ top: 0, behavior: "smooth" })
                                 }}
                             >
                                 {domToReact(children, options)}
