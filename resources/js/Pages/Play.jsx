@@ -38,7 +38,7 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
 
                 <div className='flex justify-center m-3'>
                     <div className='w-[99%] border p-5'>
-                        {wikiPageViewer(currentPageTitle)}
+                        {wikiPageViewer(currentPageTitle,updateCurrentPage)}
                     </div>
                 </div>
             </>

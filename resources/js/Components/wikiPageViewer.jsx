@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'; // Add useState and useEffect
 import parse, { domToReact } from 'html-react-parser';
 
-export default function wikiPageViewer(jaPageTitle) {
+export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
     const [wikiContent, setWikiContent] = useState(null);
 
     useEffect(() => {
