@@ -35,7 +35,7 @@ export default function wikiPageViewer(jaPageTitle) {
         }
     }
 
-    const updateLinksToPopups = (html, flag) => {
+    const updateLinksToPopups = (html) => {
         const options = {
             replace: ({ attribs, children, name, parent }) => {
                 if (!attribs || !attribs.href) return;
@@ -96,11 +96,7 @@ export default function wikiPageViewer(jaPageTitle) {
             }
         }
 
-        if (flag) {
-            return parse(html, options);
-        } else {
-            return parse(html);
-        }
+        return parse(html, options);
     }
 
     if (jaPageTitle === null || wikiContent === null) {
