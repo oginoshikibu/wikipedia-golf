@@ -36,8 +36,10 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
                     <p>現在の打数: {currentScore} 打</p>
                 </div>
 
-                <div className='flex justify-center w-[100%]'>
-                    {wikiPageViewer(currentPageTitle)}
+                <div className='flex justify-center'>
+                    <div className='w-[99%] border m-3 p-5'>
+                        {wikiPageViewer(currentPageTitle)}
+                    </div>
                 </div>
             </>
         </ErrorBoundary>
