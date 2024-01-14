@@ -31,13 +31,13 @@ export default function Play({ const: startPageTitle = "ゲーム", const: goalP
         <ErrorBoundary>
             <>
                 <Head title="Play" />
-                <div className='text-center w-[100%] m-3'>
+                <div className='text-center m-3'>
                     <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
                     <p>現在の打数: {currentScore} 打</p>
                 </div>
 
-                <div className='flex justify-center'>
-                    <div className='w-[99%] border m-3 p-5'>
+                <div className='flex justify-center m-3'>
+                    <div className='w-[99%] border p-5'>
                         {wikiPageViewer(currentPageTitle)}
                     </div>
                 </div>
