@@ -72,7 +72,8 @@ export default function wikiPageViewer(jaPageTitle) {
                                 {...attribs}
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    console.log("有効リンク");
+                                    const nextPageTitle = attribs.href.replace('./', '');
+                                    updateCurrentPage(nextPageTitle);
                                 }}
                             >
                                 {domToReact(children, options)}
@@ -84,7 +85,7 @@ export default function wikiPageViewer(jaPageTitle) {
                                 {...attribs}
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    console.log("無効リンク");
+                                    alert("無効なリンクです。");
                                 }}
                             >
                                 {domToReact(children, options)}
