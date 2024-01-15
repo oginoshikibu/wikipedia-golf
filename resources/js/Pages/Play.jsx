@@ -1,12 +1,47 @@
+import React, { useEffect, useState } from 'react';
 import { Head } from '@inertiajs/react';
+import wikiPageViewer from '@/Components/wikiPageViewer';
+import ErrorBoundary from '@/Components/ErrorBoundary';
 
-export default function Play() {
+export default function Play({ const: startPageTitle = "ゲーム", const: goalPageTitle = "ゴルフ" }) {
+
+    const [currentPageTitle, setCurrentPageTitle] = useState(null);
+    const [currentScore, setCurrentScore] = useState(-1);
+
+
+    const updateCurrentPage = async (title) => {
+        setCurrentPageTitle(title);
+        setCurrentScore(currentScore + 1);
+    }
+
+    // init
+    useEffect(() => {
+        updateCurrentPage(startPageTitle);
+    }, [startPageTitle]);
+
+
+    // judge goal
+    useEffect(() => {
+        if (currentPageTitle && currentPageTitle === goalPageTitle) {
+            alert(currentScore + "打でゴールしました");
+        }
+    }, [currentPageTitle]);
+
     return (
-        <>
-            <Head title="Play" />
-            <div className="mt-4">
-                <iframe src="https://ja.wikipedia.org/wiki/%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0" width="100%" height="1000px"></iframe>
-            </div>
-        </>
+        <ErrorBoundary>
+            <>
+                <Head title="Play" />
+                <div className='text-center m-3'>
+                    <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
+                    <p>現在のページ: {currentPageTitle}, 現在の打数: {currentScore} 打</p>
+                </div>
+
+                <div className='flex justify-center m-3'>
+                    <div className='w-[99%] border p-5'>
+                        {wikiPageViewer(currentPageTitle,updateCurrentPage)}
+                    </div>
+                </div>
+            </>
+        </ErrorBoundary>
     );
 }
