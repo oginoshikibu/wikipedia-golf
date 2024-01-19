@@ -19,7 +19,7 @@ use Inertia\Inertia;
 
 Route::get('/play',function(){
     return Inertia::render('Play');
-});
+})->name('play');
 /* breeze routes */
 
 Route::get('/', function () {
