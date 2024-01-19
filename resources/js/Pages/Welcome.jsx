@@ -1,6 +1,7 @@
 import { Link, Head } from '@inertiajs/react';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
+    console.log(auth);
     return (
         <>
             <Head title="Welcome" />
@@ -46,38 +47,19 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             />
                         </svg>
                     </div>
-                    <div>
-                        {auth.user ? (
-                            <Link
-                                href={route('dashboard')}
-                            >
-                                Dashboard
-                            </Link>
-                        ): (
-                        <>
-                            <Link
-                                href={route('login')}
-                                className='m-2'
-                            >
-                                Log in
-                            </Link>
-                            <Link
-                                href={route('register')}
-                                className='m-2'
-                            >
-                                Register
-                            </Link>
-                        </>
-                        )}
-                            
-
+                    <div>                         
                         <Link
                             href={route('play')}
                             className='m-2'
                         >
-                            Play
+                            今日の一題
                         </Link>
-
+                        <Link
+                            href={route('play')}
+                            className='m-2'
+                        >
+                            ランダムプレイ
+                        </Link>
                     </div>
                 </div>
         </div>
