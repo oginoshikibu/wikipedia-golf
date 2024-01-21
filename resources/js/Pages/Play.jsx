@@ -3,7 +3,8 @@ import { Head } from '@inertiajs/react';
 import wikiPageViewer from '@/Components/wikiPageViewer';
 import ErrorBoundary from '@/Components/ErrorBoundary';
 
-export default function Play({ const: startPageTitle = "ゲーム", const: goalPageTitle = "ゴルフ" }) {
+export default function Play({auth, const: startPageTitle = "ゲーム", const: goalPageTitle = "ゴルフ" }) {
+    console.log(auth);
 
     const [currentPageTitle, setCurrentPageTitle] = useState(null);
     const [currentScore, setCurrentScore] = useState(-1);
