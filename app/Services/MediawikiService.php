@@ -1,6 +1,16 @@
 <?php
 
 class MediawikiService {
+
+    public function getRandomJaPagesTitles($pageNumbers) {
+        $result = $this->fetchRandomJaPagesDataFromMediaAPI($pageNumbers);
+        $titles = array();
+        foreach( $result["query"]["random"] as $k => $v ) {
+            array_push($titles, $v["title"]);
+        }
+        return $titles;
+    }
+
     // Function to fetch data from the API
     public function fetchRandomJaPagesDataFromMediaAPI($pageNumbers) {
         /*
@@ -29,10 +39,6 @@ class MediawikiService {
 
         $result = json_decode( $output, true );
 
-        // foreach( $result["query"]["random"] as $k => $v ) {
-        //     echo( $v["title"] . "\n" );
-        // }
-        
         // Return the response
         return $result;
     }
