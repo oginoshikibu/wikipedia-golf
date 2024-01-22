@@ -29,7 +29,8 @@ class MediawikiService {
             "action" => "query",
             "format" => "json",
             "list" => "random",
-            "rnlimit" => (string) $pageNumbers
+            "rnlimit" => (string) $pageNumbers,
+            "rnnamespace" => "0",
         ];
 
         $url = $endPoint . "?" . http_build_query( $params );
@@ -45,5 +46,10 @@ class MediawikiService {
         return $result;
     }
 }
+
+// //debug
+// $mediawikiService = new MediawikiService();
+// $titles = $mediawikiService->getRandomJaPagesTitles(5);
+// var_dump($titles);
 
 
