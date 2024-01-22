@@ -4,7 +4,7 @@ declare(strict_types=1);
 class MediawikiService {
     
 
-    public function getRandomJaPagesTitles(int $pageNumbers): array {
+    public function getRandomJaWikiPagesTitles(int $pageNumbers): array {
         $result = $this->fetchRandomJaPagesDataFromMediaAPI($pageNumbers);
         $titles = array();
         foreach( $result["query"]["random"] as $k => $v ) {
@@ -49,7 +49,7 @@ class MediawikiService {
 
 // //debug
 // $mediawikiService = new MediawikiService();
-// $titles = $mediawikiService->getRandomJaPagesTitles(5);
+// $titles = $mediawikiService->getRandomJaWikiPagesTitles(5);
 // var_dump($titles);
 
 
