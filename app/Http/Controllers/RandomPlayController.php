@@ -8,11 +8,15 @@ use App\Services\MediawikiService;
 
 class RandomPlayController extends Controller
 {
-    //
-
-    public function index()
+    public function play()
     {
-        
-        return Inertia::render('Play');
+        $mediawikiService = new MediawikiService();
+        $twoRandomPageTitles = $mediawikiService->getRandomJaWikiPagesTitles(2);   
+        return Inertia::render('Play',
+            [
+                'startPageTitle' => $twoRandomPageTitles[0],
+                'goalPageTitle' => $twoRandomPageTitles[1],
+            ]
+    );
     }
 }
