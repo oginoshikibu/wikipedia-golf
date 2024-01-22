@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
 class MediawikiService {
+    
 
-    public function getRandomJaPagesTitles($pageNumbers) {
+    public function getRandomJaPagesTitles(int $pageNumbers): array {
         $result = $this->fetchRandomJaPagesDataFromMediaAPI($pageNumbers);
         $titles = array();
         foreach( $result["query"]["random"] as $k => $v ) {
@@ -12,7 +14,7 @@ class MediawikiService {
     }
 
     // Function to fetch data from the API
-    public function fetchRandomJaPagesDataFromMediaAPI($pageNumbers) {
+    public function fetchRandomJaPagesDataFromMediaAPI(int $pageNumbers) {
         /*
             get_random.php
 
