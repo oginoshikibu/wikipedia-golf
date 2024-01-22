@@ -2,21 +2,40 @@
 
 class MediawikiService {
     // Function to fetch data from the API
-    public function fetchDataFromAPI($url) {
-        // Initialize cURL
-        $curl = curl_init();
+    public function fetchRandomJaPagesDataFromMediaAPI($pageNumbers) {
+        /*
+            get_random.php
 
-        // Set the cURL options
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            MediaWiki API Demos
+            Demo of `Random` module: Get request to list 5 random pages.
 
-        // Execute the cURL request
-        $response = curl_exec($curl);
+            MIT License
+        */
 
-        // Close cURL
-        curl_close($curl);
+        $endPoint = "https://ja.wikipedia.org/w/api.php";
+        $params = [
+            "action" => "query",
+            "format" => "json",
+            "list" => "random",
+            "rnlimit" => (string) $pageNumbers
+        ];
 
+        $url = $endPoint . "?" . http_build_query( $params );
+
+        $ch = curl_init( $url );
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        $output = curl_exec( $ch );
+        curl_close( $ch );
+
+        $result = json_decode( $output, true );
+
+        // foreach( $result["query"]["random"] as $k => $v ) {
+        //     echo( $v["title"] . "\n" );
+        // }
+        
         // Return the response
-        return $response;
+        return $result;
     }
 }
+
+
