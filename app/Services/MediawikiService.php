@@ -1,4 +1,5 @@
 <?php
+namespace App\Services;
 declare(strict_types=1);
 
 class MediawikiService {
