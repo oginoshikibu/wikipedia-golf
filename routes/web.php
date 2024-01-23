@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RandomPlayController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,9 +18,7 @@ use Inertia\Inertia;
 */
 
 
-Route::get('/play',function(){
-    return Inertia::render('Play');
-})->name('play');
+Route::get('/play', [RandomPlayController::class, 'play'])->name('play');
 /* breeze routes */
 
 Route::get('/', function () {
