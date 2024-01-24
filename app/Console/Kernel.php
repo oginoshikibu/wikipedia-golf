@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
             $question->start_page = $twoRandomPageTitles[0];
             $question->goal_page = $twoRandomPageTitles[1];
             $question->save();
-        })->daily();
+        })->daily()->at('10:00');
     }
 
     /**
