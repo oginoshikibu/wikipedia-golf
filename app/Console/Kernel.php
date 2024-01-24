@@ -5,7 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Services\MediawikiService;
-use Illuminate\Support\Facades\Log;
+use App\Models\Question;
 
 class Kernel extends ConsoleKernel
 {
@@ -18,9 +18,10 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $mediawikiService = new MediawikiService();
             $twoRandomPageTitles = $mediawikiService->getRandomJaWikiPagesTitles(2);
-            // log
-            Log::info('twoRandomPageTitles[0] = ' . $twoRandomPageTitles[0]);
-            Log::info('twoRandomPageTitles[1] = ' . $twoRandomPageTitles[1]);
+            $question = new Question();
+            $question->start_page = $twoRandomPageTitles[0];
+            $question->goal_page = $twoRandomPageTitles[1];
+            $question->save();
         })->daily();
     }
 
