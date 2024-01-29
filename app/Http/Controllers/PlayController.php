@@ -23,18 +23,18 @@ class PlayController extends Controller
 
     public function today()
     {
-        // 昨日取得したランダムなページタイトルを取得
-        $todaysPageTitlesResponse = Question::where('created_at', '>', now()->subDay())
-            ->where('created_at', '<', now())
+        // 昨日取得したうち、最新の問題を取得
+        $todaysPageTitlesResponse = Question::where('created_at', '>', now()->subDay()->startOfDay())
+            ->where('created_at', '<', now()->startOfDay())
             ->get()
-            ->pluck('start_page', 'goal_page')
+            ->last()
             ->toArray();
 
         return Inertia::render(
             'Play',
             [
-                'startPageTitle' => array_key_exists('start_page', $todaysPageTitlesResponse) ? $todaysPageTitlesResponse['start_page'] : null,
-                'goalPageTitle' => array_key_exists('goal_page', $todaysPageTitlesResponse) ? $todaysPageTitlesResponse['goal_page'] : null,
+                'startPageTitle' => $todaysPageTitlesResponse['start_page'],
+                'goalPageTitle' => $todaysPageTitlesResponse['goal_page'],
             ]
         );
     }
