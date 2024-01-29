@@ -49,13 +49,13 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </div>
                     <div>                         
                         <Link
-                            href={route('play')}
+                            href={route('play.today')}
                             className='m-2'
                         >
                             今日の一題
                         </Link>
                         <Link
-                            href={route('play')}
+                            href={route('play.random')}
                             className='m-2'
                         >
                             ランダムプレイ
