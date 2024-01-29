@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RandomPlayController;
+use App\Http\Controllers\PlayController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,8 +18,8 @@ use Inertia\Inertia;
 */
 
 
-Route::get('/play-random', [RandomPlayController::class, 'random'])->name('play.random');
-Route::get('/play-today', [RandomPlayController::class, 'today'])->name('play.today');
+Route::get('/play-random', [PlayController::class, 'random'])->name('play.random');
+Route::get('/play-today', [PlayController::class, 'today'])->name('play.today');
 /* breeze routes */
 
 Route::get('/', function () {
@@ -41,4 +41,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
