@@ -17,7 +17,9 @@ class TodayQuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'start_page' => 'ゲーム',
+            'goal_page' => 'ゴルフ',
+            'created_at' => now()->subDay(),
         ];
     }
 }
