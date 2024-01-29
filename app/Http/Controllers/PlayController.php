@@ -35,6 +35,7 @@ class PlayController extends Controller
             [
                 'startPageTitle' => $todaysPageTitlesResponse['start_page'],
                 'goalPageTitle' => $todaysPageTitlesResponse['goal_page'],
+                'questionId' => $todaysPageTitlesResponse['question_id'],
             ]
         );
     }
