@@ -18,7 +18,8 @@ use Inertia\Inertia;
 */
 
 
-Route::get('/play', [RandomPlayController::class, 'play'])->name('play');
+Route::get('/play-random', [RandomPlayController::class, 'play-random'])->name('play.random');
+Route::get('/play-today', [RandomPlayController::class, 'play-today'])->name('play.today');
 /* breeze routes */
 
 Route::get('/', function () {
