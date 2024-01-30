@@ -28,6 +28,11 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
         setPlayHistoryStack(newPlayHistoryStack);
     }
 
+    // 本日の一題終了時の処理
+    const finishTodayQuestion = async () => {
+        
+    }
+
     // init
     useEffect(() => {
         updateCurrentPage(startPageTitle);
@@ -38,6 +43,9 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     useEffect(() => {
         if (currentPageTitle && currentPageTitle === goalPageTitle) {
             alert(currentScore + "打でゴールしました");
+            if (auth && questionId) {
+                finishTodayQuestion();
+            }
         }
     }, [currentPageTitle]);
 
