@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Services\MediawikiService;
 use App\Models\Question;
+use App\Models\Answer;
 
 class PlayController extends Controller
 {
@@ -38,5 +39,9 @@ class PlayController extends Controller
                 'questionId' => $todaysPageTitlesResponse['question_id'],
             ]
         );
+    }
+
+    public function goal()
+    {
     }
 }
