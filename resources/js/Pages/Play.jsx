@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Head } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import wikiPageViewer from '@/Components/wikiPageViewer';
 import ErrorBoundary from '@/Components/ErrorBoundary';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -10,6 +10,10 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const [currentScore, setCurrentScore] = useState(-1);
     const [playHistory, setPlayHistory] = useState([]);
     const [playHistoryStack, setPlayHistoryStack] = useState([]);
+    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+        userId: auth.user ? auth.user.id : null,
+        questionId: questionId,
+    });
 
 
     const updateCurrentPage = async (title) => {
@@ -29,8 +33,11 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     }
 
     // 本日の一題終了時の処理
-    const finishTodayQuestion = async () => {
-        
+    const goalTodayQuestion = () => {
+        setData('test', 'test');
+        setData('score', currentScore);
+        setData('playHistory', JSON.stringify(playHistory));
+        patch(route('play.today.goal'));
     }
 
     // init
@@ -43,8 +50,8 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     useEffect(() => {
         if (currentPageTitle && currentPageTitle === goalPageTitle) {
             alert(currentScore + "打でゴールしました");
-            if (auth && questionId) {
-                finishTodayQuestion();
+            if (auth.user && questionId) {
+                goalTodayQuestion();
             }
         }
     }, [currentPageTitle]);
