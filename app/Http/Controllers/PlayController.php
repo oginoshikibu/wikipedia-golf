@@ -50,7 +50,7 @@ class PlayController extends Controller
         $answer->score = $request->score;
         $answer->play_history = $request->playHistory;
         $answer->save();
-        return redirect()->route('/');
+        return redirect()->route('welcome');
     }
 
 }
