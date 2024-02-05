@@ -18,7 +18,7 @@ class QuestionFactory extends Factory
     {
         return [
             'start_page' => 'ゲーム',
-            'goal_page' => 'ゴルフ',
+            'goal_page' => '規則',
             'created_at' => now()->subDay(),
         ];
     }
