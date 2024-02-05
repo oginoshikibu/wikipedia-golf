@@ -45,7 +45,7 @@ class PlayController extends Controller
     public function goal(Request $request)
     {
         $answer = new Answer();
-        $answer->user_id = $request->userId;
+        $answer->user_id = $request->user()->id;
         $answer->question_id = $request->questionId;
         $answer->score = $request->score;
         $answer->play_history = $request->playHistory;
