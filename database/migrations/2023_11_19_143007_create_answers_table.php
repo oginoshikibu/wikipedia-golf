@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('answer_id');
             $table->bigInteger('user_id');
             $table->bigInteger('question_id');
-            $table->integer('strokes');
+            $table->integer('score');
             $table->json('play_history');
             $table->timestamps();
         });

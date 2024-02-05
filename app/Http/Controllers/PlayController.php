@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Services\MediawikiService;
 use App\Models\Question;
+use App\Models\Answer;
+use Illuminate\Http\Request;
 
 class PlayController extends Controller
 {
@@ -39,4 +41,16 @@ class PlayController extends Controller
             ]
         );
     }
+
+    public function goal(Request $request)
+    {
+        $answer = new Answer();
+        $answer->user_id = $request->user()->id;
+        $answer->question_id = $request->questionId;
+        $answer->score = $request->score;
+        $answer->play_history = $request->playHistory;
+        $answer->save();
+        return redirect()->route('welcome');
+    }
+
 }

@@ -3,6 +3,7 @@ import parse, { domToReact } from 'html-react-parser';
 
 export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
     const [wikiContent, setWikiContent] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (jaPageTitle !== null) {
@@ -27,8 +28,10 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
     }
 
     const wikiFetchAsync = async (title) => {
+        setLoading(true);
         try {
             let result = await wikiFetch(title);
+            setLoading(false);
             return result;
         } catch (err) {
             console.error(err.message);
@@ -38,13 +41,26 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
     const updateLinksToPopups = (html) => {
         const options = {
             replace: ({ attribs, children, name, parent }) => {
+
                 if (!attribs || !attribs.href) return;
+
+                if (attribs.rel === 'stylesheet') {
+                    attribs.href = 'wiki.css'
+                    return;
+                }
+
+                // 外部リンクの場合、リンクを削除する
+                if (attribs.href.match(/^(http|https):\/\//) || attribs.href.match(/^\/\/ja.wikipedia.org/)) {
+                    attribs.href = null;
+                    return;
+                }
 
                 // class属性をclassNameに変更
                 if (attribs.class) {
                     attribs.className = attribs.class;
                     delete attribs.class;
                 }
+
                 // style属性が存在し、それが文字列である場合
                 if (attribs.style && typeof attribs.style === 'string') {
                     // style属性をオブジェクトに変換
@@ -72,6 +88,7 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
                                 {...attribs}
                                 onClick={(e) => {
                                     e.preventDefault();
+                                    setLoading(true);
                                     const nextPageTitle = attribs.href.replace('./', '');
                                     updateCurrentPage(nextPageTitle);
                                     window.scrollTo({ top: 0, behavior: "smooth" })
@@ -100,7 +117,7 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
         return parse(html, options);
     }
 
-    if (jaPageTitle === null || wikiContent === null) {
+    if (loading || wikiContent === null) {
         return (
             <>
                 <p>loading...</p>
