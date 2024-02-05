@@ -20,9 +20,9 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
     }, [jaPageTitle]);
 
     const wikiFetch = async (title) => {
-        let url = encodeURI(`https://ja.wikipedia.org/w/rest.php/v1/page/${title}/with_html`);
-        const rsp = await fetch(url);
-        const data = await rsp.json(); // Await the response JSON parsing
+        const response = await fetch(route('wiki.html', { title: title }));
+        const data = await response.json();
+        console.log(data);
         return data.html;
     }
 
