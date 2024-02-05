@@ -3,6 +3,7 @@ import parse, { domToReact } from 'html-react-parser';
 
 export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
     const [wikiContent, setWikiContent] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (jaPageTitle !== null) {
@@ -27,8 +28,10 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
     }
 
     const wikiFetchAsync = async (title) => {
+        setLoading(true);
         try {
             let result = await wikiFetch(title);
+            setLoading(false);
             return result;
         } catch (err) {
             console.error(err.message);
@@ -85,6 +88,7 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
                                 {...attribs}
                                 onClick={(e) => {
                                     e.preventDefault();
+                                    setLoading(true);
                                     const nextPageTitle = attribs.href.replace('./', '');
                                     updateCurrentPage(nextPageTitle);
                                     window.scrollTo({ top: 0, behavior: "smooth" })
@@ -113,7 +117,7 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
         return parse(html, options);
     }
 
-    if (jaPageTitle === null || wikiContent === null) {
+    if (loading || wikiContent === null) {
         return (
             <>
                 <p>loading...</p>
