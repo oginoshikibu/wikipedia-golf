@@ -2,8 +2,6 @@
 declare(strict_types=1);
 namespace App\Services;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use PHPUnit\Util\Json;
 
 class MediawikiService {
@@ -19,9 +17,8 @@ class MediawikiService {
     }
 
 
-    public function fetchJaPagesHTMLFromTitle(Request $request): Response{
-        
-        $title = $request->input('title');
+    public function fetchJaPagesHTMLFromTitle(string $title): Json{
+
         $endPoint = sprintf("https://ja.wikipedia.org/w/rest.php/v1/page/%s/with_html", $title);
         $ch = curl_init( $endPoint );
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
@@ -39,9 +36,13 @@ class MediawikiService {
 
         curl_close( $ch );
 
-        return response($output, 200);
+        $result = json_decode( $output, true );
 
+        if ($result === null) {
+            throw new \Exception('Failed to decode API response: ' . json_last_error_msg());
+        }
 
+        return $result;
     }
 
     // Function to fetch data from the API
