@@ -2,8 +2,6 @@
 declare(strict_types=1);
 namespace App\Services;
 
-use PHPUnit\Util\Json;
-
 class MediawikiService {
     
 
@@ -14,35 +12,6 @@ class MediawikiService {
             array_push($titles, $v["title"]);
         }
         return $titles;
-    }
-
-
-    public function fetchJaPagesHTMLFromTitle(string $title): Json{
-
-        $endPoint = sprintf("https://ja.wikipedia.org/w/rest.php/v1/page/%s/with_html", $title);
-        $ch = curl_init( $endPoint );
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-        curl_setopt( $ch, CURLOPT_TIMEOUT, 10 ); // Set timeout value in seconds
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10); // Set connect timeout value in seconds
-        $output = curl_exec( $ch );
-
-        if ($output === false) {
-            throw new \Exception('Failed to fetch data from the API: ' . curl_error($ch));
-        }
-
-        if (curl_getinfo($ch, CURLINFO_HTTP_CODE) === 0) {
-            throw new \Exception('Request to the API timed out.');
-        }
-
-        curl_close( $ch );
-
-        $result = json_decode( $output, true );
-
-        if ($result === null) {
-            throw new \Exception('Failed to decode API response: ' . json_last_error_msg());
-        }
-
-        return $result;
     }
 
     // Function to fetch data from the API
