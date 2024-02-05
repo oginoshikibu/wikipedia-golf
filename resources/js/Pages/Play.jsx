@@ -10,11 +10,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const [currentScore, setCurrentScore] = useState(-1);
     const [playHistory, setPlayHistory] = useState([]);
     const [playHistoryStack, setPlayHistoryStack] = useState([]);
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
-        userId: auth.user ? auth.user.id : null,
-        questionId: questionId,
-    });
-
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm();
 
     const updateCurrentPage = async (title) => {
         setCurrentPageTitle(title);
@@ -32,19 +28,25 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
         setPlayHistoryStack(newPlayHistoryStack);
     }
 
-    // 本日の一題終了時の処理
-    const goalTodayQuestion = () => {
-        setData('test', 'test');
-        setData('score', currentScore);
-        setData('playHistory', JSON.stringify(playHistory));
-        patch(route('play.today.goal'));
-    }
-
     // init
     useEffect(() => {
         updateCurrentPage(startPageTitle);
     }, [startPageTitle]);
 
+    useEffect(() => {
+        if (data.score && data.playHistory) {
+            post(route('play.today.goal'));
+        }
+    }, [data]);
+
+    // 本日の一題終了時の処理
+    const goalTodayQuestion = async () => {
+        setData({
+            questionId: questionId,
+            score: currentScore,
+            playHistory: JSON.stringify(playHistory),
+        });
+    }
 
     // judge goal
     useEffect(() => {
