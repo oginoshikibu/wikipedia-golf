@@ -38,13 +38,26 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
     const updateLinksToPopups = (html) => {
         const options = {
             replace: ({ attribs, children, name, parent }) => {
+
                 if (!attribs || !attribs.href) return;
+
+                if (attribs.rel === 'stylesheet') {
+                    attribs.href = 'wiki.css'
+                    return;
+                }
+
+                // 外部リンクの場合、リンクを削除する
+                if (attribs.href.match(/^(http|https):\/\//) || attribs.href.match(/^\/\/ja.wikipedia.org/)) {
+                    attribs.href = null;
+                    return;
+                }
 
                 // class属性をclassNameに変更
                 if (attribs.class) {
                     attribs.className = attribs.class;
                     delete attribs.class;
                 }
+
                 // style属性が存在し、それが文字列である場合
                 if (attribs.style && typeof attribs.style === 'string') {
                     // style属性をオブジェクトに変換
