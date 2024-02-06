@@ -64,22 +64,20 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
             <>
                 <Head title="Play" />
                 <Header auth={auth} />
-                <div className='mt-16'>
-                    <div className='text-center m-3'>
-                        <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
-                        <p>現在のページ: {currentPageTitle}, 現在の打数: {currentScore} 打</p>
+                <div className='text-center m-3'>
+                    <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
+                    <p>現在のページ: {currentPageTitle}, 現在の打数: {currentScore} 打</p>
+                </div>
+                <div className='justify-center m-3'>
+                    <div className='mb-3'>
+                        <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage}>
+                            前ページ{
+                                playHistoryStack.length <= 1 ? '' : '「' + playHistoryStack[playHistoryStack.length - 2] + '」'
+                            }に1打で戻る
+                        </PrimaryButton>
                     </div>
-                    <div className='justify-center m-3'>
-                        <div className='mb-3'>
-                            <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage}>
-                                前ページ{
-                                    playHistoryStack.length <= 1 ? '' : '「' + playHistoryStack[playHistoryStack.length - 2] + '」'
-                                }に1打で戻る
-                            </PrimaryButton>
-                        </div>
-                        <div className='w-[99%] border p-5'>
-                            {wikiPageViewer(currentPageTitle, updateCurrentPage)}
-                        </div>
+                    <div className='w-[99%] border p-5'>
+                        {wikiPageViewer(currentPageTitle, updateCurrentPage)}
                     </div>
                 </div>
             </>

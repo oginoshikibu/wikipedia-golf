@@ -32,6 +32,7 @@ export default function Header({ auth, children }) {
                     )}
                 </header>
             </div>
+            <div className='h-16'></div> {/* for padding */}
         </>
     );
 }
