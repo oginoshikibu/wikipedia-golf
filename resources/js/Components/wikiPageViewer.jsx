@@ -45,7 +45,7 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
                 if (!attribs || !attribs.href) return;
 
                 if (attribs.rel === 'stylesheet') {
-                    attribs.href = 'wiki.css'
+                    attribs.href = 'css/wiki.css'
                     return;
                 }
 
