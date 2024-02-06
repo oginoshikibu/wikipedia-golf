@@ -23,12 +23,6 @@ Route::get('/play-today', [PlayController::class, 'today'])->name('play.today');
 
 Route::post('/play-today-goal', [PlayController::class, 'goal'])->middleware('auth')->name('play.today.goal');
 
-Route::get('/wiki.css', function () {
-    return response(file_get_contents(public_path('css/wiki.css')), 200, [
-        'Content-Type' => 'text/css',
-    ]);
-})->name('wiki.css');
-
 /* breeze routes */
 
 Route::get('/', function () {
