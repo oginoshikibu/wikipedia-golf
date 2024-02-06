@@ -5,7 +5,9 @@ export default function Header({ auth, children }) {
     return (
         <>
             <div className="fixed top-0 w-full h-16 bg-white shadow z-50">
-                <header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
+                <img src="img/sport010.svg" className='h-14 m-1'/>
+                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
+
                     {auth.user ? (
                         <Link
                             href={route('dashboard')}
@@ -30,7 +32,7 @@ export default function Header({ auth, children }) {
                             </Link>
                         </>
                     )}
-                </header>
+                </div>
             </div>
             <div className='h-16'></div> {/* for padding */}
         </>
