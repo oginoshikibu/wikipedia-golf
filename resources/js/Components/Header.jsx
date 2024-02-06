@@ -1,11 +1,11 @@
 import React from 'react';
-
+import { Link } from '@inertiajs/react';
 
 export default function Header({ auth, children }) {
     return (
         <>
-            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
-                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
+            <div className="fixed top-0 w-full h-16 bg-white shadow z-50">
+                <header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
                     {auth.user ? (
                         <Link
                             href={route('dashboard')}
@@ -30,7 +30,7 @@ export default function Header({ auth, children }) {
                             </Link>
                         </>
                     )}
-                </div>
+                </header>
             </div>
         </>
     );
