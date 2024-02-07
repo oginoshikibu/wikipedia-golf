@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
+import ApplicationLogo from './ApplicationLogo';
 
 export default function Header({ auth, children }) {
     return (
         <>
             <div className="flex w-full h-16 bg-white shadow z-50">
-                <a href={route('welcome')}>
-                    <img src="img/sport010.svg" className='h-14 m-1 flex-none' />
-                </a>
+                <ApplicationLogo className='h-14 m-1 flex-none' />
                 <div className='flex-1 flex justify-center h-16'>
                     <div className='flex items-center'>
                         {children}
