@@ -4,6 +4,7 @@ import wikiPageViewer from '@/Components/wikiPageViewer';
 import ErrorBoundary from '@/Components/ErrorBoundary';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Header from '@/Components/Header';
+import Footer from '@/Components/Footer';
 
 export default function Play({ auth, startPageTitle, goalPageTitle, questionId = null }) {
 
@@ -66,21 +67,24 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                 <Header auth={auth}>
                     <p>現在のページ: {currentPageTitle}, 現在の打数: {currentScore} 打</p>
                 </Header>
-                <div className='text-center m-3'>
-                    <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
-                </div>
+
                 <div className='justify-center m-3'>
-                    <div className='mb-3'>
+
+                        {wikiPageViewer(currentPageTitle, updateCurrentPage)}
+                </div>
+                <Footer>
+                    <div className='m-3'>
                         <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage}>
                             前ページ{
                                 playHistoryStack.length <= 1 ? '' : '「' + playHistoryStack[playHistoryStack.length - 2] + '」'
                             }に1打で戻る
                         </PrimaryButton>
                     </div>
-                    <div className='w-[99%] border p-5'>
-                        {wikiPageViewer(currentPageTitle, updateCurrentPage)}
+                    <div className='text-center m-3'>
+                        <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
                     </div>
-                </div>
+
+                </Footer>
             </>
         </ErrorBoundary>
     );

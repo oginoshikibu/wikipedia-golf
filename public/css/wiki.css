@@ -443,21 +443,18 @@ figure[typeof~='mw:File/Thumb']>.mw-file-magnify::after {
     position: absolute;
     bottom: -11px;
     right: 6px;
-    background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e)
 }
 
 .mw-content-ltr figure[typeof~='mw:File/Thumb']>.mw-file-description::after,
 .mw-content-ltr figure[typeof~='mw:File/Thumb']>.mw-file-magnify::after {
     right: 6px;
     left: auto;
-    background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e)
 }
 
 .mw-content-rtl figure[typeof~='mw:File/Thumb']>.mw-file-description::after,
 .mw-content-rtl figure[typeof~='mw:File/Thumb']>.mw-file-magnify::after {
     right: auto;
     left: 6px;
-    background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-rtl.svg?38fd5)
 }
 
 .mw-gallery-traditional .gallerybox>.thumb::before {
@@ -1004,7 +1001,6 @@ figure[typeof~='mw:File/Thumb']>figcaption:empty {
         overflow: hidden;
         width: 15px;
         height: 11px;
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e);
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -1026,7 +1022,6 @@ figure[typeof~='mw:File/Thumb']>figcaption:empty {
     }
 
     .mw-content-ltr .magnify a {
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e)
     }
 
     .mw-content-rtl .magnify {
@@ -1036,7 +1031,6 @@ figure[typeof~='mw:File/Thumb']>figcaption:empty {
     }
 
     .mw-content-rtl .magnify a {
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-rtl.svg?38fd5)
     }
 
     figure[typeof~='mw:File/Thumb'],
@@ -1096,21 +1090,18 @@ figure[typeof~='mw:File/Thumb']>figcaption:empty {
         position: absolute;
         bottom: -11px;
         right: 6px;
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e)
     }
 
     .mw-content-ltr figure[typeof~='mw:File/Thumb']>.mw-file-description::after,
     .mw-content-ltr figure[typeof~='mw:File/Thumb']>.mw-file-magnify::after {
         right: 6px;
         left: auto;
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e)
     }
 
     .mw-content-rtl figure[typeof~='mw:File/Thumb']>.mw-file-description::after,
     .mw-content-rtl figure[typeof~='mw:File/Thumb']>.mw-file-magnify::after {
         right: auto;
         left: 6px;
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-rtl.svg?38fd5)
     }
 
     .mw-body-content::after {
