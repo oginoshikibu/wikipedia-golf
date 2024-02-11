@@ -1,5 +1,6 @@
 import { Link, Head } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 export default function Welcome({ auth }) {
 
@@ -39,22 +40,31 @@ export default function Welcome({ auth }) {
                     <div className="flex justify-center">
                         <ApplicationLogo className="w-40 h-40 fill-current" />
                     </div>
-                    <div className="flex justify-center">                     
-                        <Link
-                            href={route('play.today')}
-                            className='m-2'
-                        >
-                            今日の一題
+                    <div className="flex justify-center text-3xl font-bold">
+                        Wikipedia Golf
+                    </div>
+                    <div className="flex justify-center">
+                        <Link href={route('play.today')}>
+
+                            <PrimaryButton
+                                className='m-6'
+                                type='button'
+                            >
+                                今日の一題
+                            </PrimaryButton>
                         </Link>
-                        <Link
-                            href={route('play.random')}
-                            className='m-2'
-                        >
-                            ランダムプレイ
+                        
+                        <Link href={route('play.random')}>
+                            <PrimaryButton
+                                href={route('play.random')}
+                                className='m-6'
+                            >
+                                ランダムプレイ
+                            </PrimaryButton>
                         </Link>
                     </div>
                 </div>
-        </div>
+            </div>
         </>
     );
 }
