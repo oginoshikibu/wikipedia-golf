@@ -43,21 +43,25 @@ export default function Welcome({ auth }) {
                     <div className="flex justify-center text-3xl font-bold">
                         Wikipedia Golf
                     </div>
-                    <div className="flex justify-center">
+                    <div className="flex justify-center text-lg m-2">
+                        最小クリックでゴールページまでたどり着け！！
+                    </div>
+
+                    <div className="flex justify-center mt-5">
                         <Link href={route('play.today')}>
 
                             <PrimaryButton
-                                className='m-6'
+                                className='mr-4'
                                 type='button'
                             >
                                 今日の一題
                             </PrimaryButton>
                         </Link>
-                        
+
                         <Link href={route('play.random')}>
                             <PrimaryButton
                                 href={route('play.random')}
-                                className='m-6'
+                                className='ml-4'
                             >
                                 ランダムプレイ
                             </PrimaryButton>
