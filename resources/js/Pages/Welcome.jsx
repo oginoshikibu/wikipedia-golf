@@ -9,7 +9,9 @@ export default function Welcome({ auth }) {
     return (
         <>
             <Head title="Welcome" />
-            <AccountCircle auth={auth} className='fixed top-0 right-0 h-14 z-50 mr-2 mt-1' />
+            <div className='fixed top-0 right-0 h-16 w-16 mr-3 z-50'>
+                <AccountCircle auth={auth} className='absolute top-0 right-0 h-14 z-50'/>
+            </div>
             <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
 
 
