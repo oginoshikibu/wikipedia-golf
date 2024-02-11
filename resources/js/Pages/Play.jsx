@@ -65,9 +65,12 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
             <>
                 <Head title="Play" />
                 <Header auth={auth}>
-                    <p>現在のページ: {currentPageTitle}, 現在の打数: {currentScore} 打</p>
+                <div className="flex-1 flex justify-center items-center text-3xl font-bold">
+                    Wikipedia Golf
+                </div>
                 </Header>
 
+                {/* <p>現在のページ: {currentPageTitle}, 現在の打数: {currentScore} 打</p> */}
                 <div className='justify-center m-3'>
 
                         {wikiPageViewer(currentPageTitle, updateCurrentPage)}
