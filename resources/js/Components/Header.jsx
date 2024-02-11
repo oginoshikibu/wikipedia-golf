@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
+import AccountCircle from './AccountCircle';
 import ApplicationLogo from './ApplicationLogo';
 
 export default function Header({ auth, children }) {
@@ -7,38 +8,11 @@ export default function Header({ auth, children }) {
         <>
             <div className="flex w-full h-16 bg-white shadow z-50">
                 <ApplicationLogo className='h-14 m-1 flex-none' />
-                <div className='flex-1 flex justify-center h-16'>
-                    <div className='flex items-center'>
-                        {children}
-                    </div>
+                <div className="flex-1 flex justify-center items-center text-3xl font-bold">
+                    Wikipedia Golf
                 </div>
-                <div className='flex-2 flex justify-end h-16'>
-                    <div className='flex items-center mr-3'>
-                        {auth.user ? (
-                            <Link
-                                href={route('dashboard')}
-                                className="font-semibold text-gray-600 hover:text-rose-600 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                            >
-                                Dashboard
-                            </Link>
-                        ) : (
-                            <>
-                                <Link
-                                    href={route('login')}
-                                    className="font-semibold text-gray-600 hover:text-rose-600 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                >
-                                    Log in
-                                </Link>
-
-                                <Link
-                                    href={route('register')}
-                                    className="ms-4 font-semibold text-gray-600 hover:text-rose-600 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                >
-                                    Register
-                                </Link>
-                            </>
-                        )}
-                    </div>
+                <div className='flex-2 flex items-center h-16 mr-2'>
+                    <AccountCircle auth={auth} className='h-14' />
                 </div>
             </div>
         </>
