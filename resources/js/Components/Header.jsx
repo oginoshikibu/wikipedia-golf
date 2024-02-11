@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from '@inertiajs/react';
 import AccountCircle from './AccountCircle';
 import ApplicationLogo from './ApplicationLogo';
 
-export default function Header({ auth, children }) {
+export default function Header({ auth }) {
     return (
         <>
-            <div className="flex w-full h-16 bg-white shadow z-50">
+            <div className="flex w-full h-16 bg-white border-b-2 z-50">
                 <ApplicationLogo className='h-14 m-1 ml-3 flex-none' />
                 <div className="flex-1 flex justify-center items-center text-3xl font-bold">
                     Wikipedia Golf
