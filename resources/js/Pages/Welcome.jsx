@@ -1,7 +1,7 @@
 import { Link, Head } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+export default function Welcome({ auth }) {
 
     return (
         <>
@@ -39,7 +39,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className="flex justify-center">
                         <ApplicationLogo className="w-40 h-40 fill-current" />
                     </div>
-                    <div className="flex justify-center">                         
+                    <div className="flex justify-center">                     
                         <Link
                             href={route('play.today')}
                             className='m-2'
