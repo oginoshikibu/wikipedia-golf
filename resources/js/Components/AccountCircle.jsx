@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "@inertiajs/react";
 import Dropdown from "@/Components/Dropdown";
 
 export default function AccountCircle({ auth, ...props }) {
@@ -14,11 +13,15 @@ export default function AccountCircle({ auth, ...props }) {
                     </Dropdown.Trigger>
 
                     <Dropdown.Content>
-                        <Dropdown.Link href={route('dashboard')}>Dashboard</Dropdown.Link>
-                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                        <Dropdown.Link href={route('logout')} method="post" as="button">
-                            Log Out
-                        </Dropdown.Link>
+                        {auth.user ? (<>
+                            <Dropdown.Link href={route('dashboard')}>Dashboard</Dropdown.Link>
+                            <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                            <Dropdown.Link href={route('logout')} method="post" as="button">Log Out</Dropdown.Link>
+                        </>)
+                            : (<>
+                                <Dropdown.Link href={route('login')}>Log In</Dropdown.Link>
+                                <Dropdown.Link href={route('register')}>Register</Dropdown.Link>
+                            </>)}
                     </Dropdown.Content>
                 </Dropdown>
             </div>
