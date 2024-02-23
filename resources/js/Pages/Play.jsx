@@ -4,6 +4,7 @@ import wikiPageViewer from '@/Components/wikiPageViewer';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
+import Modal from '@/Components/Modal';
 
 export default function Play({ auth, startPageTitle, goalPageTitle, questionId = null }) {
 
@@ -28,6 +29,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
         setPlayHistory([...playHistory, newCurrentPageTitle]);
         setPlayHistoryStack(newPlayHistoryStack);
     }
+
 
     // init
     useEffect(() => {
@@ -71,6 +73,14 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                 <div className='justify-center m-3'>
                     {wikiPageViewer(currentPageTitle, updateCurrentPage)}
                 </div>
+
+
+                <Modal show={true}>
+                    <div  className='justify-center m-3'>
+                        {wikiPageViewer(goalPageTitle, ()=>{})}
+                    </div>
+                </Modal>
+
                 <Footer>
                     <div className='text-center m-3'>
                         <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage}>
