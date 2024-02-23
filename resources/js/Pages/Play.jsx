@@ -12,6 +12,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const [currentScore, setCurrentScore] = useState(-1);
     const [playHistory, setPlayHistory] = useState([]);
     const [playHistoryStack, setPlayHistoryStack] = useState([]);
+    const [showHintModal, setShowHintModal] = useState(false);
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm();
 
     const updateCurrentPage = async (title) => {
@@ -30,6 +31,9 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
         setPlayHistoryStack(newPlayHistoryStack);
     }
 
+    const switchShowHintModal = () => {
+        setShowHintModal(!showHintModal);
+    }
 
     // init
     useEffect(() => {
@@ -75,10 +79,8 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                 </div>
 
 
-                <Modal show={true}>
-                    <div  className='justify-center m-3'>
+                <Modal show={showHintModal}>
                         {wikiPageViewer(goalPageTitle, ()=>{})}
-                    </div>
                 </Modal>
 
                 <Footer>
@@ -96,7 +98,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                         <p>スコア：{currentScore} 打</p>
                     </div>
                     <div className='text-center m-3 ml-auto'>
-                        <PrimaryButton onClick={backToPreviousPage}>
+                        <PrimaryButton onClick={switchShowHintModal}>
                             ヒント：ゴールページを見る
                         </PrimaryButton>
                     </div>
