@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import wikiPageViewer from '@/Components/wikiPageViewer';
-import ErrorBoundary from '@/Components/ErrorBoundary';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
@@ -61,7 +60,6 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     }, [currentPageTitle]);
 
     return (
-        <ErrorBoundary>
             <>
                 <Head title="Play" />
                 <Header auth={auth}>
@@ -95,6 +93,5 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
 
                 </Footer>
             </>
-        </ErrorBoundary>
     );
 }
