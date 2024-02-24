@@ -31,9 +31,14 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
         setPlayHistoryStack(newPlayHistoryStack);
     }
 
-    const switchShowHintModal = () => {
-        setShowHintModal(!showHintModal);
+    const activateHintModal = () => {
+        setShowHintModal(true);
     }
+
+    const deactivateHintModal = () => {
+        setShowHintModal(false);
+    }
+
 
     // init
     useEffect(() => {
@@ -75,12 +80,12 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                 </Header>
 
                 <div className='justify-center m-3'>
-                    {wikiPageViewer(currentPageTitle, updateCurrentPage)}
+                    {wikiPageViewer(currentPageTitle, updateCurrentPage, true)}
                 </div>
 
 
-                <Modal show={showHintModal}>
-                        {wikiPageViewer(goalPageTitle, ()=>{})}
+                <Modal show={showHintModal} closeable={true} onClose={deactivateHintModal}>
+                        {wikiPageViewer(goalPageTitle, ()=>{}, false)}
                 </Modal>
 
                 <Footer>
@@ -98,7 +103,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                         <p>スコア：{currentScore} 打</p>
                     </div>
                     <div className='text-center m-3 ml-auto'>
-                        <PrimaryButton onClick={switchShowHintModal}>
+                        <PrimaryButton onClick={activateHintModal}>
                             ヒント：ゴールページを見る
                         </PrimaryButton>
                     </div>
