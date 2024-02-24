@@ -1,14 +1,17 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({auth, userAchievements}) {
 
-    const userAchievement = {
-        cleared: 5,
-        streak: 10,
-        shortestScore: 100,
-        averageScore: 100,
-    };
+    console.log(auth);
+    console.log(userAchievements);
+
+    // const userAchievement = {
+    //     cleared: 5,
+    //     streak: 10,
+    //     shortestScore: 100,
+    //     averageScore: 100,
+    // };
     
     return (
         <AuthenticatedLayout
@@ -26,10 +29,10 @@ export default function Dashboard({ auth }) {
                             <div className="p-6 text-gray-900">
                                 <h2 className="text-lg font-medium text-gray-900">Achievement</h2>
                                 <div className="grid grid-cols-3 gap-4 mt-4">
-                                    {Object.keys(userAchievement).map((key) => (
+                                    {Object.keys(userAchievements).map((key) => (
                                         <div className="bg-gray-100 p-4 rounded" key={key}>
                                             <h3 className="text-sm font-medium text-gray-500">{key}</h3>
-                                            <p className="text-lg font-semibold text-gray-900">{userAchievement[key]}</p>
+                                            <p className="text-lg font-semibold text-gray-900">{userAchievements[key]}</p>
                                         </div>
                                     ))}
                                 </div>
