@@ -4,6 +4,7 @@ import wikiPageViewer from '@/Components/wikiPageViewer';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
+import Modal from '@/Components/Modal';
 
 export default function Play({ auth, startPageTitle, goalPageTitle, questionId = null }) {
 
@@ -11,6 +12,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const [currentScore, setCurrentScore] = useState(-1);
     const [playHistory, setPlayHistory] = useState([]);
     const [playHistoryStack, setPlayHistoryStack] = useState([]);
+    const [showHintModal, setShowHintModal] = useState(false);
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm();
 
     const updateCurrentPage = async (title) => {
@@ -28,6 +30,15 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
         setPlayHistory([...playHistory, newCurrentPageTitle]);
         setPlayHistoryStack(newPlayHistoryStack);
     }
+
+    const activateHintModal = () => {
+        setShowHintModal(true);
+    }
+
+    const deactivateHintModal = () => {
+        setShowHintModal(false);
+    }
+
 
     // init
     useEffect(() => {
@@ -69,8 +80,14 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                 </Header>
 
                 <div className='justify-center m-3'>
-                    {wikiPageViewer(currentPageTitle, updateCurrentPage)}
+                    {wikiPageViewer(currentPageTitle, updateCurrentPage, true)}
                 </div>
+
+
+                <Modal show={showHintModal} closeable={true} onClose={deactivateHintModal}>
+                        {wikiPageViewer(goalPageTitle, ()=>{}, false)}
+                </Modal>
+
                 <Footer>
                     <div className='text-center m-3'>
                         <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage}>
@@ -86,7 +103,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                         <p>スコア：{currentScore} 打</p>
                     </div>
                     <div className='text-center m-3 ml-auto'>
-                        <PrimaryButton onClick={backToPreviousPage}>
+                        <PrimaryButton onClick={activateHintModal}>
                             ヒント：ゴールページを見る
                         </PrimaryButton>
                     </div>

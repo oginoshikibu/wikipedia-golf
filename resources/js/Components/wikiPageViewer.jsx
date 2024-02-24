@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'; // Add useState and useEffect
 import parse, { domToReact } from 'html-react-parser';
 
-export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
+export default function wikiPageViewer(jaPageTitle, updateCurrentPage, canUpdate) {
     const [wikiContent, setWikiContent] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -88,6 +88,9 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage) {
                                 {...attribs}
                                 onClick={(e) => {
                                     e.preventDefault();
+                                    if (!canUpdate) {
+                                        return;
+                                    }
                                     setLoading(true);
                                     const nextPageTitle = attribs.href.replace('./', '');
                                     updateCurrentPage(nextPageTitle);
