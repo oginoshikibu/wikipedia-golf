@@ -47,10 +47,13 @@ export default function Modal({ children, show = false, maxWidth = '2xl', closea
                 >
 
                     <div className={`mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto ${maxWidthClass}`}>
-                        <div className="overflow-y-auto max-h-[90vh] m-3">
-                            <Dialog.Panel>
-                                {children}
-                            </Dialog.Panel>
+                        <div className="overflow-y-auto max-h-[90vh]">
+                            <div className='m-3'>
+                                <Dialog.Panel>
+                                    {children}
+                                </Dialog.Panel>
+
+                            </div>
                         </div>
                     </div>
                 </Transition.Child>
