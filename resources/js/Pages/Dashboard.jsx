@@ -3,16 +3,6 @@ import { Head } from '@inertiajs/react';
 
 export default function Dashboard({auth, userAchievements}) {
 
-    console.log(auth);
-    console.log(userAchievements);
-
-    // const userAchievement = {
-    //     cleared: 5,
-    //     streak: 10,
-    //     shortestScore: 100,
-    //     averageScore: 100,
-    // };
-    
     return (
         <AuthenticatedLayout
             auth={auth}
