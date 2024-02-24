@@ -60,4 +60,13 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * Get the user's play information.
+     */
+    public function play(Request $request): Response
+    {
+        return Inertia::render('Dashboard', [
+        ]);
+    }
 }
