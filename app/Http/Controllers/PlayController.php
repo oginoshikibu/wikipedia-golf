@@ -43,14 +43,21 @@ class PlayController extends Controller
     }
 
     public function goal(Request $request)
-    {
+    {   
+        // 既に解答済みかどうかを確認
+        if (Answer::where('user_id', $request->user()->id)
+            ->where('question_id', $request->questionId)
+            ->exists()
+        ){
+            return;
+        }
         $answer = new Answer();
         $answer->user_id = $request->user()->id;
         $answer->question_id = $request->questionId;
         $answer->score = $request->score;
         $answer->play_history = $request->playHistory;
         $answer->save();
-        return redirect()->route('welcome');
+        return;
     }
 
 }

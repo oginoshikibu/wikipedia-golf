@@ -36,7 +36,7 @@ export default function Dashboard({auth, userAchievements}) {
                                         </div>
                                     ))}
                                 </div>
-                                <div className='mt-4 text-sm text-gray-600'>※集計対象は「今日の一題」のみです</div>
+                                <div className='mt-4 text-sm text-gray-600'>※集計対象は「今日の一題」初回クリアのみです</div>
                             </div>
                         </section>
 
