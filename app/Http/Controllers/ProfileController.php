@@ -84,7 +84,7 @@ class ProfileController extends Controller
         $answers = $answers->sortBy('created_at');
         $today = now();
         // 最終日が一昨日以前の場合は0を返す
-        if ($answers->last()->created_at->lt($today->subDays(2))) {
+        if ($answers->last()->created_at->lt($today->subDays())) {
             return 0;
         }
 
@@ -99,6 +99,7 @@ class ProfileController extends Controller
                     return false;
                 }
             });
+            return $streaks;
         }
 
         // 最終日が昨日の場合
@@ -113,8 +114,10 @@ class ProfileController extends Controller
                 }
             $streaks--;
             });
+            return $streaks;
         }
 
-        return $streaks;
+        // 例外処理
+        return 0;
     }
 }
