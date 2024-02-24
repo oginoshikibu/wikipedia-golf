@@ -5,9 +5,10 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import Header from '@/Components/Header';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Login({ status, canResetPassword }) {
+export default function Login({ auth, status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -27,6 +28,8 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
+        <>
+        <Header auth={auth}/>
         <GuestLayout>
             <Head title="Log in" />
 
@@ -93,5 +96,7 @@ export default function Login({ status, canResetPassword }) {
                 </div>
             </form>
         </GuestLayout>
+        </>
+
     );
 }

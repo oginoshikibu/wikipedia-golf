@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import wikiPageViewer from '@/Components/wikiPageViewer';
-import ErrorBoundary from '@/Components/ErrorBoundary';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
@@ -61,31 +60,38 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     }, [currentPageTitle]);
 
     return (
-        <ErrorBoundary>
             <>
                 <Head title="Play" />
                 <Header auth={auth}>
-                    <p>現在のページ: {currentPageTitle}, 現在の打数: {currentScore} 打</p>
+                    <div className="flex-1 flex justify-center items-center text-3xl font-bold">
+                        Wikipedia Golf
+                    </div>
                 </Header>
 
                 <div className='justify-center m-3'>
-
-                        {wikiPageViewer(currentPageTitle, updateCurrentPage)}
+                    {wikiPageViewer(currentPageTitle, updateCurrentPage)}
                 </div>
                 <Footer>
-                    <div className='m-3'>
+                    <div className='text-center m-3'>
                         <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage}>
                             前ページ{
                                 playHistoryStack.length <= 1 ? '' : '「' + playHistoryStack[playHistoryStack.length - 2] + '」'
                             }に1打で戻る
                         </PrimaryButton>
                     </div>
-                    <div className='text-center m-3'>
-                        <p>start page: {startPageTitle} {"→"} goal page: {goalPageTitle}</p>
+                    <div className='text-center m-3 center'>
+                        <p>現在のページ: {currentPageTitle} → ゴール: {goalPageTitle}</p>
+                    </div>
+                    <div className='text-center m-3 ml-auto'>
+                        <p>スコア：{currentScore} 打</p>
+                    </div>
+                    <div className='text-center m-3 ml-auto'>
+                        <PrimaryButton onClick={backToPreviousPage}>
+                            ヒント：ゴールページを見る
+                        </PrimaryButton>
                     </div>
 
                 </Footer>
             </>
-        </ErrorBoundary>
     );
 }
