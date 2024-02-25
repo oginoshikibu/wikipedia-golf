@@ -80,7 +80,11 @@ class ProfileController extends Controller
     }
 
     private function countConsecutiveDays($answers)
-    {
+    {   
+        // 一度も解答していない場合は0を返す
+        if ($answers->isEmpty()) {
+            return 0;
+        }
         $answers = $answers->sortBy('created_at');
         $today = now();
         // 最終日が一昨日以前の場合は0を返す
