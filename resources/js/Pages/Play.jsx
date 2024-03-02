@@ -71,44 +71,46 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     }, [currentPageTitle]);
 
     return (
-            <>
-                <Head title="Play" />
-                <Header auth={auth}>
-                    <div className="flex-1 flex justify-center items-center text-3xl font-bold">
-                        Wikipedia Golf
-                    </div>
-                </Header>
+        <>
+            <Head title="Play" />
+            <Header auth={auth}>
+                <div className="flex-1 flex justify-center items-center text-3xl font-bold">
+                    Wikipedia Golf
+                </div>
+            </Header>
 
-                <div className='justify-center m-3'>
-                    {wikiPageViewer(currentPageTitle, updateCurrentPage, true)}
+            <div className='justify-center m-3'>
+                {wikiPageViewer(currentPageTitle, updateCurrentPage, true)}
+            </div>
+
+
+            <Modal show={showHintModal} closeable={true} onClose={deactivateHintModal}>
+                {wikiPageViewer(goalPageTitle, () => { }, false)}
+            </Modal>
+
+            <Footer>
+                <div className='mt-auto mb-auto ml-3'>
+                    <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage} className='w-auto whitespace-nowrap'>
+                        前ページ{
+                            playHistoryStack.length <= 1 ? '' : '「' + playHistoryStack[playHistoryStack.length - 2] + '」'
+                        }に戻る（1打消費）
+                    </PrimaryButton>
+                </div>
+                <div className='ml-auto mt-auto mb-auto ml-3 mr-3 center'>
+                    現在のページ: 『{currentPageTitle}』 → ゴール: 『{goalPageTitle}』
+                </div>
+                <div className='ml-auto mt-auto mb-auto mr-3 whitespace-nowrap'>
+                    スコア：{currentScore} 打
+                </div>
+                <div className=' ml-auto mt-auto mb-auto mr-3'>
+                    <PrimaryButton onClick={activateHintModal} className='w-auto whitespace-nowrap'>
+                        <span>
+                            ヒント：ゴールページを見る
+                        </span>
+                    </PrimaryButton>
                 </div>
 
-
-                <Modal show={showHintModal} closeable={true} onClose={deactivateHintModal}>
-                        {wikiPageViewer(goalPageTitle, ()=>{}, false)}
-                </Modal>
-
-                <Footer>
-                    <div className='text-center m-3'>
-                        <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage}>
-                            前ページ{
-                                playHistoryStack.length <= 1 ? '' : '「' + playHistoryStack[playHistoryStack.length - 2] + '」'
-                            }に1打で戻る
-                        </PrimaryButton>
-                    </div>
-                    <div className='text-center m-3 center'>
-                        <p>現在のページ: {currentPageTitle} → ゴール: {goalPageTitle}</p>
-                    </div>
-                    <div className='text-center m-3 ml-auto'>
-                        <p>スコア：{currentScore} 打</p>
-                    </div>
-                    <div className='text-center m-3 ml-auto'>
-                        <PrimaryButton onClick={activateHintModal}>
-                            ヒント：ゴールページを見る
-                        </PrimaryButton>
-                    </div>
-
-                </Footer>
-            </>
+            </Footer>
+        </>
     );
 }
