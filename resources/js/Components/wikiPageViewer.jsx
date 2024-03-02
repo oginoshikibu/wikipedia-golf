@@ -11,7 +11,6 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage, canUpdate
                 const html = await wikiFetchAsync(jaPageTitle);
                 setWikiContent(
                     <>
-                        {/* {updateLinksToPopups(html, false)} */}
                         {updateLinksToPopups(html, true)}
                     </>
                 );
@@ -49,10 +48,18 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage, canUpdate
                     return;
                 }
 
-                // 外部リンクの場合、リンクを削除する
-                if (attribs.href.match(/^(http|https):\/\//) || attribs.href.match(/^\/\/ja.wikipedia.org/)) {
+                // 外部リンクの場合、リンクを削除し、aタグをspanタグに変換
+                if (attribs.href.match(/^(http|https|\/\/|mw-data)/)) {
                     attribs.href = null;
-                    return;
+                    if (parent && parent.name !== 'head') {
+                        return (
+                            <span
+                                {...attribs}
+                            >
+                                {domToReact(children, options)}
+                            </span>
+                        );
+                    }
                 }
 
                 // class属性をclassNameに変更
@@ -80,7 +87,7 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage, canUpdate
                 // aタグの場合
                 if (attribs.href && parent && parent.name !== 'head') {
                     // 一階層下のリンクのみを対象にする ex. ./hoge
-                    const isChildLink = attribs.href.match(/^\.\/[^\/]*$/);
+                    const isChildLink = attribs.href.match(/^\.\/(?!.*#cite)[^\/]*$/);
 
                     if (isChildLink) {
                         return (
@@ -101,16 +108,13 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage, canUpdate
                             </a>
                         );
                     } else {
+                        attribs.href = null;
                         return (
-                            <a
+                            <span
                                 {...attribs}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    alert("無効なリンクです。");
-                                }}
                             >
                                 {domToReact(children, options)}
-                            </a >
+                            </span >
                         );
                     }
                 }
