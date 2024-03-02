@@ -13,6 +13,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const [playHistory, setPlayHistory] = useState([]);
     const [playHistoryStack, setPlayHistoryStack] = useState([]);
     const [showHintModal, setShowHintModal] = useState(false);
+    const [showGoalModal, setShowGoalModal] = useState(false);
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm();
 
     const updateCurrentPage = async (title) => {
@@ -63,7 +64,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     // judge goal
     useEffect(() => {
         if (currentPageTitle && currentPageTitle === goalPageTitle) {
-            alert(currentScore + "打でゴールしました");
+            setShowGoalModal(true);
             if (auth.user && questionId) {
                 goalTodayQuestion();
             }
@@ -86,6 +87,12 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
 
             <Modal show={showHintModal} closeable={true} onClose={deactivateHintModal}>
                 {wikiPageViewer(goalPageTitle, () => {}, false)}
+            </Modal>
+
+            <Modal show={showGoalModal} closeable={true} onClose={setShowGoalModal}>
+                <div className='text-center'>
+                    やったね！！
+                </div>
             </Modal>
 
             <Footer>
