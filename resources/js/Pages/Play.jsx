@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import wikiPageViewer from '@/Components/wikiPageViewer';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Header from '@/Components/Header';
@@ -85,7 +85,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
 
 
             <Modal show={showHintModal} closeable={true} onClose={deactivateHintModal}>
-                {wikiPageViewer(goalPageTitle, () => { }, false)}
+                {wikiPageViewer(goalPageTitle, () => {}, false)}
             </Modal>
 
             <Footer>
