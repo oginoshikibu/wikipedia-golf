@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import wikiPageViewer from '@/Components/wikiPageViewer';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Header from '@/Components/Header';
@@ -13,6 +13,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const [playHistory, setPlayHistory] = useState([]);
     const [playHistoryStack, setPlayHistoryStack] = useState([]);
     const [showHintModal, setShowHintModal] = useState(false);
+    const [showGoalModal, setShowGoalModal] = useState(false);
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm();
 
     const updateCurrentPage = async (title) => {
@@ -34,11 +35,6 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const activateHintModal = () => {
         setShowHintModal(true);
     }
-
-    const deactivateHintModal = () => {
-        setShowHintModal(false);
-    }
-
 
     // init
     useEffect(() => {
@@ -63,7 +59,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     // judge goal
     useEffect(() => {
         if (currentPageTitle && currentPageTitle === goalPageTitle) {
-            alert(currentScore + "打でゴールしました");
+            setShowGoalModal(true);
             if (auth.user && questionId) {
                 goalTodayQuestion();
             }
@@ -84,8 +80,37 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
             </div>
 
 
-            <Modal show={showHintModal} closeable={true} onClose={deactivateHintModal}>
-                {wikiPageViewer(goalPageTitle, () => {}, false)}
+            <Modal show={showHintModal} closeable={true} onClose={setShowHintModal}>
+                {wikiPageViewer(goalPageTitle, () => { }, false)}
+            </Modal>
+
+            <Modal show={showGoalModal} closeable={true} onClose={setShowGoalModal}>
+                <div className='text-center'>
+                    <div className='text-2xl font-bold'>
+                        ゴール！
+                    </div>
+                    <div className='m-3'>
+                        {playHistory.join("→")}
+                    </div>
+                    <div className='m-3'>
+                        スコア：{currentScore} 打
+                    </div>
+                    <PrimaryButton onClick={() => {
+                        window.open(`https://twitter.com/intent/tweet?hashtags=WikipediaGolf&text=「${startPageTitle}」→「${goalPageTitle}」score: ${currentScore}%0a&url=https://wikipedia-golf.com`, '_blank')
+                    }
+                    } className='m-3' disabled={true}>
+                        <span>
+                            結果をツイート
+                        </span>
+                    </PrimaryButton>
+                    <Link href={route("welcome")}>
+                        <PrimaryButton className='m-3'>
+                            <span>
+                                トップページへ
+                            </span>
+                        </PrimaryButton>
+                    </Link>
+                </div>
             </Modal>
 
             <Footer>
