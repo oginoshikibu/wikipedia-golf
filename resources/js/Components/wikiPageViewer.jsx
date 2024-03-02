@@ -87,7 +87,7 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage, canUpdate
                 // aタグの場合
                 if (attribs.href && parent && parent.name !== 'head') {
                     // 一階層下のリンクのみを対象にする ex. ./hoge
-                    const isChildLink = attribs.href.match(/^\.\/[^\/]*$/);
+                    const isChildLink = attribs.href.match(/^\.\/(?!.*#cite)[^\/]*$/);
 
                     if (isChildLink) {
                         return (
@@ -108,17 +108,13 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage, canUpdate
                             </a>
                         );
                     } else {
-                        console.log(attribs.href);
+                        attribs.href = null;
                         return (
-                            <a
+                            <span
                                 {...attribs}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    alert("無効なリンクです。");
-                                }}
                             >
                                 {domToReact(children, options)}
-                            </a >
+                            </span >
                         );
                     }
                 }
