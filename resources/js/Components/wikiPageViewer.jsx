@@ -87,7 +87,7 @@ export default function wikiPageViewer(jaPageTitle, updateCurrentPage, canUpdate
                 // aタグの場合
                 if (attribs.href && parent && parent.name !== 'head') {
                     // 一階層下のリンクのみを対象にする ex. ./hoge
-                    const isChildLink = attribs.href.match(/^\.\/(?!.*#cite|?!.*\?)[^\/]*$/);
+                    const isChildLink = attribs.href.match(/^\.\/(?!.*(#cite|\?))[^\/]*$/);
 
                     if (isChildLink) {
                         return (
