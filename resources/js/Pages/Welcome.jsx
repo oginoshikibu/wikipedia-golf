@@ -1,16 +1,16 @@
-import { Link, Head } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import PrimaryButton from '@/Components/PrimaryButton';
-import Header from '@/Components/Header';
 import AccountCircle from '@/Components/AccountCircle';
 
 export default function Welcome({ auth }) {
 
     return (
         <>
-            <Head title="Welcome" />
+            <AppHead title="Welcome" />
             <div className='fixed top-0 right-0 h-16 w-16 mr-3 z-50'>
-                <AccountCircle auth={auth} className='absolute top-0 right-0 h-14 z-50'/>
+                <AccountCircle auth={auth} className='absolute top-0 right-0 h-14 z-50' />
             </div>
             <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
 
