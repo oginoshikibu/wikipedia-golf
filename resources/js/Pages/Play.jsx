@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import wikiPageViewer from '@/Components/wikiPageViewer';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Header from '@/Components/Header';
@@ -68,7 +69,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
 
     return (
         <>
-            <Head title="Play" />
+            <AppHead title="Play" />
             <Header auth={auth}>
                 <div className="flex-1 flex justify-center items-center text-3xl font-bold">
                     Wikipedia Golf
