@@ -115,21 +115,21 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
             </Modal>
 
             <Footer>
-                <div className='mt-auto mb-auto ml-3'>
-                    <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage} className='w-auto whitespace-nowrap'>
+                <div className='my-auto py-1 ml-3'>
+                    <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage} className='w-auto '>
                         前ページ{
                             playHistoryStack.length <= 1 ? '' : '「' + playHistoryStack[playHistoryStack.length - 2] + '」'
                         }に戻る（1打消費）
                     </PrimaryButton>
                 </div>
-                <div className='ml-auto mt-auto mb-auto ml-3 mr-3 center'>
+                <div className='my-auto mx-3 center'>
                     現在のページ: 『{currentPageTitle}』 → ゴール: 『{goalPageTitle}』
                 </div>
-                <div className='ml-auto mt-auto mb-auto mr-3 whitespace-nowrap'>
-                    スコア：{currentScore} 打
+                <div className='ml-auto my-auto mr-3'>
+                    スコア：{currentScore}打
                 </div>
-                <div className=' ml-auto mt-auto mb-auto mr-3'>
-                    <PrimaryButton onClick={activateHintModal} className='w-auto whitespace-nowrap'>
+                <div className='my-auto py-1 mr-3'>
+                    <PrimaryButton onClick={activateHintModal} className='w-auto '>
                         <span>
                             ヒント：ゴールページを見る
                         </span>
