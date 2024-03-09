@@ -99,7 +99,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                     <PrimaryButton onClick={() => {
                         window.open(`https://twitter.com/intent/tweet?hashtags=WikipediaGolf&text=「${startPageTitle}」→「${goalPageTitle}」score: ${currentScore}%0a&url=https://wikipedia-golf.com`, '_blank')
                     }
-                    } className='m-3' disabled={true}>
+                    } className='m-3'>
                         <span>
                             結果をツイート
                         </span>
