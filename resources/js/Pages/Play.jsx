@@ -119,13 +119,13 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                     <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage} className='w-auto '>
                         前ページ{
                             playHistoryStack.length <= 1 ? '' : '「' + playHistoryStack[playHistoryStack.length - 2] + '」'
-                        }に戻る（1打消費）
+                        }に戻る (1打消費)
                     </PrimaryButton>
                 </div>
-                <div className='my-auto mx-3 center'>
+                <div className='m-auto justify-center'>
                     現在のページ: 『{currentPageTitle}』 → ゴール: 『{goalPageTitle}』
                 </div>
-                <div className='ml-auto my-auto mr-3'>
+                <div className='my-auto mr-3 ml-auto'>
                     スコア：{currentScore}打
                 </div>
                 <div className='my-auto py-1 mr-3'>
