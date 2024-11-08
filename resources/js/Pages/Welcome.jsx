@@ -28,13 +28,13 @@ export default function Welcome({ auth }) {
                     </div>
 
                     <div className="flex justify-center mt-5">
-                        <Link href={route('play.today')}>
+                        <Link href={route('play.ridaisai')}>
 
                             <PrimaryButton
                                 className='mr-4'
                                 type='button'
                             >
-                                今日の一題
+                                理大祭のお題でプレイ
                             </PrimaryButton>
                         </Link>
 
