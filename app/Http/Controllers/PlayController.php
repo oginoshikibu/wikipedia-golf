@@ -29,7 +29,7 @@ class PlayController extends Controller
             'Play',
             [
                 'startPageTitle' => '東京理科大学',
-                'goalPageTitle' => '留年',
+                'goalPageTitle' => '原級留置',
             ]
         );
     }
