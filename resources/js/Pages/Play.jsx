@@ -19,7 +19,7 @@ const countUpIntervalSeconds = (countTime, setCountTime) => {
 }
 
 export default function Play({ auth, startPageTitle, goalPageTitle, questionId = null }) {
-    const TIME_LIMIT_SECONDS = 10; // 10 minutes
+    const TIME_LIMIT_SECONDS = 10 * 60; // 10 minutes
 
     const [currentPageTitle, setCurrentPageTitle] = useState(null);
     const [currentScore, setCurrentScore] = useState(-1);
@@ -182,19 +182,39 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                         スコア：{currentScore}打
                     </div>
                     <div>
-                        残り時間：{TIME_LIMIT_SECONDS >= elapsedSeconds ? '' : '-'}
-                        {String(Math.floor(Math.abs(TIME_LIMIT_SECONDS - elapsedSeconds) / 60)).padStart(2, '0').split('').map((char, index) => (
-                            <span key={index} style={{ display: 'inline-block', width: '1ch', textAlign: 'center' }}>
-                                {char}
-                            </span>
-                        ))}
-                        分
-                        {String(Math.abs(TIME_LIMIT_SECONDS - elapsedSeconds) % 60).padStart(2, '0').split('').map((char, index) => (
-                            <span key={index} style={{ display: 'inline-block', width: '1ch', textAlign: 'center' }}>
-                                {char}
-                            </span>
-                        ))}
-                        秒
+                        {TIME_LIMIT_SECONDS >= elapsedSeconds ? (
+                            <>
+                                残り時間：
+                                {String(Math.floor((TIME_LIMIT_SECONDS - elapsedSeconds) / 60)).padStart(2, '0').split('').map((char, index) => (
+                                    <span key={index} style={{ display: 'inline-block', width: '1ch', textAlign: 'center' }}>
+                                        {char}
+                                    </span>
+                                ))}
+                                分
+                                {String((TIME_LIMIT_SECONDS - elapsedSeconds) % 60).padStart(2, '0').split('').map((char, index) => (
+                                    <span key={index} style={{ display: 'inline-block', width: '1ch', textAlign: 'center' }}>
+                                        {char}
+                                    </span>
+                                ))}
+                                秒
+                            </>
+                        ) : (
+                            <>
+                                経過時間：
+                                {String(Math.floor(elapsedSeconds / 60)).padStart(2, '0').split('').map((char, index) => (
+                                    <span key={index} style={{ display: 'inline-block', width: '1ch', textAlign: 'center' }}>
+                                        {char}
+                                    </span>
+                                ))}
+                                分
+                                {String(elapsedSeconds % 60).padStart(2, '0').split('').map((char, index) => (
+                                    <span key={index} style={{ display: 'inline-block', width: '1ch', textAlign: 'center' }}>
+                                        {char}
+                                    </span>
+                                ))}
+                                秒
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className='my-auto py-1 mr-3'>
@@ -204,7 +224,6 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                         </span>
                     </PrimaryButton>
                 </div>
-
             </Footer>
         </>
     );
