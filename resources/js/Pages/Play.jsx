@@ -7,7 +7,19 @@ import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
 import Modal from '@/Components/Modal';
 
+const countUpIntervalSeconds = (countTime, setCountTime) => {
+    useEffect(() => {
+        const countDownInterval = setInterval(() => {
+            setCountTime(countTime + 1)
+        }, 1000)
+        return () => {
+            clearInterval(countDownInterval)
+        }
+    }, [countTime])
+}
+
 export default function Play({ auth, startPageTitle, goalPageTitle, questionId = null }) {
+    const TIME_LIMIT_SECONDS = 60 * 10; // 10 minutes
 
     const [currentPageTitle, setCurrentPageTitle] = useState(null);
     const [currentScore, setCurrentScore] = useState(-1);
@@ -15,7 +27,10 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const [playHistoryStack, setPlayHistoryStack] = useState([]);
     const [showHintModal, setShowHintModal] = useState(false);
     const [showGoalModal, setShowGoalModal] = useState(false);
+    const [elapsedSeconds, setElapsedSeconds] = useState(0);
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm();
+
+    countUpIntervalSeconds(elapsedSeconds, setElapsedSeconds);
 
     const updateCurrentPage = async (title) => {
         setCurrentPageTitle(title);
@@ -115,7 +130,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
             </Modal>
 
             <Footer>
-                <div className='my-auto py-1 ml-3'>
+                <div className='my-auto py-1 ml-3 justify-center'>
                     <PrimaryButton disabled={playHistoryStack.length <= 1} onClick={backToPreviousPage} className='w-auto '>
                         前ページ{
                             playHistoryStack.length <= 1 ? '' : '「' + playHistoryStack[playHistoryStack.length - 2] + '」'
@@ -125,12 +140,20 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                 <div className='m-auto justify-center'>
                     現在のページ: 『{currentPageTitle}』 → ゴール: 『{goalPageTitle}』
                 </div>
-                <div className='my-auto mr-3 ml-auto'>
+                <div className='my-2 mr-6 ml-2 justify-center'>
                     <div className='center'>
                         スコア：{currentScore}打
                     </div>
                     <div>
-                        残り時間：00:00
+                        残り時間：
+                        <span style={{ display: 'inline-block', width: '2ch', textAlign: 'center' }}>
+                            {String(Math.floor((TIME_LIMIT_SECONDS - elapsedSeconds) / 60)).padStart(2, '0')}
+                        </span>
+                        分
+                        <span style={{ display: 'inline-block', width: '2ch', textAlign: 'center' }}>
+                            {String((TIME_LIMIT_SECONDS - elapsedSeconds) % 60).padStart(2, '0')}
+                        </span>
+                        秒
                     </div>
                 </div>
                 <div className='my-auto py-1 mr-3'>
