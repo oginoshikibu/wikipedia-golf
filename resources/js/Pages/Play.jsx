@@ -151,14 +151,18 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                         スコア：{currentScore}打
                     </div>
                     <div>
-                        残り時間：
-                        <span style={{ display: 'inline-block', width: '2ch', textAlign: 'center' }}>
-                            {String(Math.floor((TIME_LIMIT_SECONDS - elapsedSeconds) / 60)).padStart(2, '0')}
-                        </span>
+                        残り時間：{TIME_LIMIT_SECONDS >= elapsedSeconds ? '' : '-'}
+                        {String(Math.floor(Math.abs(TIME_LIMIT_SECONDS - elapsedSeconds) / 60)).padStart(2, '0').split('').map((char, index) => (
+                            <span key={index} style={{ display: 'inline-block', width: '1ch', textAlign: 'center' }}>
+                                {char}
+                            </span>
+                        ))}
                         分
-                        <span style={{ display: 'inline-block', width: '2ch', textAlign: 'center' }}>
-                            {String((TIME_LIMIT_SECONDS - elapsedSeconds) % 60).padStart(2, '0')}
-                        </span>
+                        {String(Math.abs(TIME_LIMIT_SECONDS - elapsedSeconds) % 60).padStart(2, '0').split('').map((char, index) => (
+                            <span key={index} style={{ display: 'inline-block', width: '1ch', textAlign: 'center' }}>
+                                {char}
+                            </span>
+                        ))}
                         秒
                     </div>
                 </div>
