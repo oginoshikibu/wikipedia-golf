@@ -32,6 +32,12 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
 
     countUpIntervalSeconds(elapsedSeconds, setElapsedSeconds);
 
+    useEffect(() => {
+        if (elapsedSeconds == TIME_LIMIT_SECONDS) {
+            alert('時間切れです。');
+        }
+    }, [elapsedSeconds]);
+
     const updateCurrentPage = async (title) => {
         setCurrentPageTitle(title);
         setCurrentScore(currentScore + 1);
