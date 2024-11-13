@@ -126,7 +126,12 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                     現在のページ: 『{currentPageTitle}』 → ゴール: 『{goalPageTitle}』
                 </div>
                 <div className='my-auto mr-3 ml-auto'>
-                    スコア：{currentScore}打
+                    <div className='center'>
+                        スコア：{currentScore}打
+                    </div>
+                    <div>
+                        残り時間：00:00
+                    </div>
                 </div>
                 <div className='my-auto py-1 mr-3'>
                     <PrimaryButton onClick={activateHintModal} className='w-auto '>
