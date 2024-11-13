@@ -19,7 +19,7 @@ const countUpIntervalSeconds = (countTime, setCountTime) => {
 }
 
 export default function Play({ auth, startPageTitle, goalPageTitle, questionId = null }) {
-    const TIME_LIMIT_SECONDS = 60 * 10; // 10 minutes
+    const TIME_LIMIT_SECONDS = 10; // 10 minutes
 
     const [currentPageTitle, setCurrentPageTitle] = useState(null);
     const [currentScore, setCurrentScore] = useState(-1);
@@ -28,13 +28,14 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const [showHintModal, setShowHintModal] = useState(false);
     const [showGoalModal, setShowGoalModal] = useState(false);
     const [elapsedSeconds, setElapsedSeconds] = useState(0);
+    const [showTimeOverModal, setShowTimeOverModal] = useState(false);
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm();
 
     countUpIntervalSeconds(elapsedSeconds, setElapsedSeconds);
 
     useEffect(() => {
         if (elapsedSeconds == TIME_LIMIT_SECONDS) {
-            alert('時間切れです。');
+            setShowTimeOverModal(true);
         }
     }, [elapsedSeconds]);
 
@@ -123,6 +124,36 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                     } className='m-3'>
                         <span>
                             結果をツイート
+                        </span>
+                    </PrimaryButton>
+                    <Link href={route("welcome")}>
+                        <PrimaryButton className='m-3'>
+                            <span>
+                                トップページへ
+                            </span>
+                        </PrimaryButton>
+                    </Link>
+                </div>
+            </Modal>
+
+            <Modal show={showTimeOverModal} closeable={false} onClose={setShowTimeOverModal}>
+                <div className='text-center'>
+                    <div className='text-2xl font-bold'>
+                        時間切れです。
+                    </div>
+                    <div className='m-2'>
+                        {playHistory.join("→")}
+                    </div>
+                    <div className='m-2'>
+                        現在のスコア：{currentScore} 打
+                    </div>
+                    <div className='m-2'>
+                        後ろに並んでいる人がいたら交代してください！！
+                    </div>
+                    <PrimaryButton onClick={() => { setShowTimeOverModal(false); }
+                    } className='m-3'>
+                        <span>
+                            続けて遊ぶ
                         </span>
                     </PrimaryButton>
                     <Link href={route("welcome")}>
