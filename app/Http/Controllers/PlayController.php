@@ -29,9 +29,44 @@ class PlayController extends Controller
             'Play',
             [
                 'startPageTitle' => '東京理科大学',
-                'goalPageTitle' => '原級留置',
+                'goalPageTitle' => '東京物理学校',
             ]
         );
+    }
+
+    public function ridaisaiGoal(Request $request)
+    {
+        $score = $request->score;
+        $userName = $request->userName;
+        $elapsedSeconds = $request->elapsedSeconds;
+
+        if (!is_numeric($elapsedSeconds)) {
+            return response()->json(['error' => 'Invalid elapsed seconds'], 400);
+        }
+        if (!is_numeric($score)) {
+            return response()->json(['error' => 'Invalid score'], 400);
+        }
+        if ($elapsedSeconds >= 1000000) {
+            return response()->json(['error' => 'Elapsed seconds too high'], 400);
+        }
+
+        # score + elapsedSeconds(6桁)の形式で、scoreを一つの数値に変換
+        $score = $score * 1000000 + $elapsedSeconds;
+
+        $endpoint = "http://54.84.41.124:8080";
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post($endpoint, [
+            'json' => [
+                'score' => $score,
+                'username' => $userName,
+            ]
+        ]);
+
+        # 400系のエラーが返ってきた場合はエラーを返す
+        if ($response->getStatusCode() >= 400) {
+            return response()->json(['error' => 'Failed to send score'], 400);
+        }
+        return to_route('welcome');
     }
 
     public function goal(Request $request)

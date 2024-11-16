@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 
 Route::get('/play-random', [PlayController::class, 'random'])->name('play.random');
 Route::get('/play-ridaisai', [PlayController::class, 'ridaisai'])->name('play.ridaisai');
+Route::post('/play-ridaisai-goal', [PlayController::class, 'ridaisaiGoal'])->name('play.ridaisai.goal');
 
 Route::post('/play-today-goal', [PlayController::class, 'goal'])->middleware('auth')->name('play.today.goal');
 

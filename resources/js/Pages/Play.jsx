@@ -28,8 +28,9 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const [showHintModal, setShowHintModal] = useState(false);
     const [showGoalModal, setShowGoalModal] = useState(false);
     const [elapsedSeconds, setElapsedSeconds] = useState(0);
+    const [goalTime, setGoalTime] = useState(null);
     const [showTimeOverModal, setShowTimeOverModal] = useState(false);
-    const { data, setData, post, errors, processing, recentlySuccessful } = useForm();
+    const { data, setData, post, errors, processing} = useForm();
 
     countUpIntervalSeconds(elapsedSeconds, setElapsedSeconds);
 
@@ -65,27 +66,24 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     }, [startPageTitle]);
 
     useEffect(() => {
-        if (data.score && data.playHistory) {
-            post(route('play.today.goal'));
+        if (data.score && data.elapsedSeconds && data.userName) {
+            post(route('play.ridaisai.goal'));
         }
     }, [data]);
 
-    // 本日の一題終了時の処理
-    const goalTodayQuestion = async () => {
+    const ridaisaiGoal = async (userName) => {
         setData({
-            questionId: questionId,
             score: currentScore,
-            playHistory: JSON.stringify(playHistory),
+            elapsedSeconds: goalTime,
+            userName: userName,
         });
     }
 
     // judge goal
     useEffect(() => {
         if (currentPageTitle && currentPageTitle === goalPageTitle) {
+            setGoalTime(elapsedSeconds);
             setShowGoalModal(true);
-            if (auth.user && questionId) {
-                goalTodayQuestion();
-            }
         }
     }, [currentPageTitle]);
 
@@ -116,23 +114,29 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                         {playHistory.join("→")}
                     </div>
                     <div className='m-3'>
-                        スコア：{currentScore} 打
+                        スコア：{currentScore} 打　経過時間：{String(Math.floor(goalTime / 60)).padStart(2, '0')}分{String(goalTime % 60).padStart(2, '0')}秒
                     </div>
-                    <PrimaryButton onClick={() => {
-                        window.open(`https://twitter.com/intent/tweet?hashtags=WikipediaGolf&text=「${startPageTitle}」→「${goalPageTitle}」score: ${currentScore}%0a&url=https://wikipedia-golf.com`, '_blank')
-                    }
-                    } className='m-3'>
-                        <span>
-                            結果をツイート
-                        </span>
-                    </PrimaryButton>
-                    <Link href={route("welcome")}>
-                        <PrimaryButton className='m-3'>
-                            <span>
-                                トップページへ
-                            </span>
-                        </PrimaryButton>
-                    </Link>
+                    {/* ユーザー名の入力form*/}
+                    <div className='m-3'>
+                        <form onSubmit={(e) => { e.preventDefault(); ridaisaiGoal(e.target.userName.value); }}>
+                            <input type="hidden" name="score" value={currentScore} />
+                            <input type="hidden" name="elapsedSeconds" value={goalTime} />
+                            <input name="userName" type="text" placeholder="ユーザー名" className='m-3' />
+                            <PrimaryButton type="submit" className='m-3'>
+                                <span>
+                                    スコアを登録
+                                </span>
+                            </PrimaryButton>
+                        </form>
+                        <Link href={route("welcome")}>
+                            <PrimaryButton className='m-3'>
+                                <span>
+                                    トップページへ
+                                </span>
+                            </PrimaryButton>
+                        </Link>
+                    </div>
+
                 </div>
             </Modal>
 
