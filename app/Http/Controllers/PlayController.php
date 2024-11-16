@@ -30,6 +30,7 @@ class PlayController extends Controller
             [
                 'startPageTitle' => '東京理科大学',
                 'goalPageTitle' => '東京物理学校',
+                'isRidaisai' => true,
             ]
         );
     }

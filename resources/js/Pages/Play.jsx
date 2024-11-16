@@ -18,7 +18,7 @@ const countUpIntervalSeconds = (countTime, setCountTime) => {
     }, [countTime])
 }
 
-export default function Play({ auth, startPageTitle, goalPageTitle, errorCode = null, errorInfo = null }) {
+export default function Play({ auth, startPageTitle, goalPageTitle, errorCode = null, errorInfo = null, isRidaisai = false }) {
     const TIME_LIMIT_SECONDS = 10 * 60; // 10 minutes
 
     const [currentPageTitle, setCurrentPageTitle] = useState(null);
@@ -121,19 +121,20 @@ export default function Play({ auth, startPageTitle, goalPageTitle, errorCode = 
                     <div className='m-3'>
                         スコア：{currentScore} 打　経過時間：{String(Math.floor(goalTime / 60)).padStart(2, '0')}分{String(goalTime % 60).padStart(2, '0')}秒
                     </div>
-                    {/* ユーザー名の入力form*/}
                     <div className='m-3'>
-                        <form onSubmit={(e) => { e.preventDefault(); ridaisaiGoalSubmit(e.target.userName.value); }}>
-                            <input type="hidden" name="score" value={currentScore} />
-                            <input type="hidden" name="elapsedSeconds" value={goalTime} />
-                            <input name="userName" type="text" placeholder="ユーザー名" className='m-3' />
-                            <PrimaryButton type="submit" className='m-3'>
-                                <span>
-                                    スコアを登録
-                                </span>
-                            </PrimaryButton>
-                            {errorCode && <div className='text-red-500'>既に登録されているユーザー名です</div>}
-                        </form>
+                        {isRidaisai &&
+                            <form onSubmit={(e) => { e.preventDefault(); ridaisaiGoalSubmit(e.target.userName.value); }}>
+                                <input type="hidden" name="score" value={currentScore} />
+                                <input type="hidden" name="elapsedSeconds" value={goalTime} />
+                                <input name="userName" type="text" placeholder="ユーザー名" className='m-3' />
+                                <PrimaryButton type="submit" className='m-3'>
+                                    <span>
+                                        スコアを登録
+                                    </span>
+                                </PrimaryButton>
+                                {errorCode && <div className='text-red-500'>既に登録されているユーザー名です</div>}
+                            </form>
+                        }
                         <Link href={route("welcome")}>
                             <PrimaryButton className='m-3'>
                                 <span>
