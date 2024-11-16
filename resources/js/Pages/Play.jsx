@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useForm } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import AppHead from '@/Components/AppHead';
 import wikiPageViewer from '@/Components/wikiPageViewer';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -18,7 +18,7 @@ const countUpIntervalSeconds = (countTime, setCountTime) => {
     }, [countTime])
 }
 
-export default function Play({ auth, startPageTitle, goalPageTitle, questionId = null }) {
+export default function Play({ auth, startPageTitle, goalPageTitle, errorCode = null, errorInfo = null }) {
     const TIME_LIMIT_SECONDS = 10 * 60; // 10 minutes
 
     const [currentPageTitle, setCurrentPageTitle] = useState(null);
@@ -30,7 +30,6 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     const [elapsedSeconds, setElapsedSeconds] = useState(0);
     const [goalTime, setGoalTime] = useState(null);
     const [showTimeOverModal, setShowTimeOverModal] = useState(false);
-    const { data, setData, post, errors, processing} = useForm();
 
     countUpIntervalSeconds(elapsedSeconds, setElapsedSeconds);
 
@@ -41,6 +40,11 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
     }, [elapsedSeconds]);
 
     const updateCurrentPage = async (title) => {
+        if (title === currentPageTitle || !title) {
+            console.log(errorCode);
+            console.log(errorInfo);
+            return;
+        }
         setCurrentPageTitle(title);
         setCurrentScore(currentScore + 1);
         setPlayHistory([...playHistory, title]);
@@ -65,18 +69,19 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
         updateCurrentPage(startPageTitle);
     }, [startPageTitle]);
 
-    useEffect(() => {
-        if (data.score && data.elapsedSeconds && data.userName) {
-            post(route('play.ridaisai.goal'));
+    const ridaisaiGoalSubmit = async (userName) => {
+        if (!userName) {
+            return;
         }
-    }, [data]);
-
-    const ridaisaiGoal = async (userName) => {
-        setData({
+        const data = {
             score: currentScore,
             elapsedSeconds: goalTime,
             userName: userName,
-        });
+            goalPageTitle: goalPageTitle,
+
+        }
+        console.log(data);
+        router.post(route('play.ridaisai.goal'), data);
     }
 
     // judge goal
@@ -105,7 +110,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                 {wikiPageViewer(goalPageTitle, () => { }, false)}
             </Modal>
 
-            <Modal show={showGoalModal} closeable={true} onClose={setShowGoalModal}>
+            <Modal show={showGoalModal} closeable={false} onClose={setShowGoalModal}>
                 <div className='text-center'>
                     <div className='text-2xl font-bold'>
                         ゴール！
@@ -118,7 +123,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                     </div>
                     {/* ユーザー名の入力form*/}
                     <div className='m-3'>
-                        <form onSubmit={(e) => { e.preventDefault(); ridaisaiGoal(e.target.userName.value); }}>
+                        <form onSubmit={(e) => { e.preventDefault(); ridaisaiGoalSubmit(e.target.userName.value); }}>
                             <input type="hidden" name="score" value={currentScore} />
                             <input type="hidden" name="elapsedSeconds" value={goalTime} />
                             <input name="userName" type="text" placeholder="ユーザー名" className='m-3' />
@@ -127,6 +132,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                                     スコアを登録
                                 </span>
                             </PrimaryButton>
+                            {errorCode && <div className='text-red-500'>既に登録されているユーザー名です</div>}
                         </form>
                         <Link href={route("welcome")}>
                             <PrimaryButton className='m-3'>
@@ -140,7 +146,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, questionId =
                 </div>
             </Modal>
 
-            <Modal show={showTimeOverModal} closeable={false} onClose={setShowTimeOverModal}>
+            <Modal show={showTimeOverModal && !showGoalModal} closeable={false} onClose={setShowTimeOverModal}>
                 <div className='text-center'>
                     <div className='text-2xl font-bold'>
                         時間切れです。

@@ -39,6 +39,7 @@ class PlayController extends Controller
         $score = $request->score;
         $userName = $request->userName;
         $elapsedSeconds = $request->elapsedSeconds;
+        $goalPageTitle = $request->goalPageTitle;
 
         if (!is_numeric($elapsedSeconds)) {
             return response()->json(['error' => 'Invalid elapsed seconds'], 400);
@@ -55,17 +56,23 @@ class PlayController extends Controller
 
         $endpoint = "http://54.84.41.124:8080";
         $client = new \GuzzleHttp\Client();
-        $response = $client->post($endpoint, [
-            'json' => [
-                'score' => $score,
-                'username' => $userName,
-            ]
-        ]);
-
-        # 400系のエラーが返ってきた場合はエラーを返す
-        if ($response->getStatusCode() >= 400) {
-            return response()->json(['error' => 'Failed to send score'], 400);
+        try {
+            $client->post($endpoint, [
+                'json' => [
+                    'score' => $score,
+                    'username' => $userName,
+                ]
+            ]);
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            // Log the error or handle it as needed
+            $e->getResponse();
+            return Inertia::render('Play', [
+                'errorCode' => $e->getResponse()->getStatusCode(),
+                'goalPageTitle' => $goalPageTitle,
+                'errorInfo' => $e->getResponse()->getBody()->getContents(),
+            ]);
         }
+
         return to_route('welcome');
     }
 
