@@ -86,7 +86,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, errorCode = 
 
     // judge goal
     useEffect(() => {
-        if (currentPageTitle && currentPageTitle === goalPageTitle) {
+        if (currentPageTitle && currentPageTitle.replace(/_/g, ' ') === goalPageTitle.replace(/_/g, ' ')) {
             setGoalTime(elapsedSeconds);
             setShowGoalModal(true);
         }
