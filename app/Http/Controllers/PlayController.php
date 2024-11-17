@@ -25,11 +25,13 @@ class PlayController extends Controller
     public function ridaisai()
     {
 
+        // 今日の日付を取得
+        $today = date('m月d日');
         return Inertia::render(
             'Play',
             [
-                'startPageTitle' => '東京理科大学',
-                'goalPageTitle' => '東京物理学校',
+                'startPageTitle' => $today,
+                'goalPageTitle' => '東京理科大学',
                 'isRidaisai' => true,
             ]
         );
