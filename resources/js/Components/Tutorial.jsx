@@ -59,7 +59,7 @@ export default function Tutorial({exitFunc}) {
                 options={
                     {
                         skipLabel: "",
-                        doneLabel: "Close",
+                        doneLabel: "Let's start!",
                         scrollToElement: false,
                     }
                 }
