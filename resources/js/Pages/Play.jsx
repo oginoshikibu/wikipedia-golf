@@ -6,16 +6,18 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
 import Modal from '@/Components/Modal';
+import Tutorial from '@/Components/Tutorial';
 
-const countUpIntervalSeconds = (countTime, setCountTime) => {
+const countUpIntervalSeconds = (countTime, setCountTime, canCountUp) => {
     useEffect(() => {
+        if (!canCountUp) return;
         const countDownInterval = setInterval(() => {
             setCountTime(countTime + 1)
         }, 1000)
         return () => {
             clearInterval(countDownInterval)
         }
-    }, [countTime])
+    }, [countTime, canCountUp])
 }
 
 export default function Play({ auth, startPageTitle, goalPageTitle, errorCode = null, errorInfo = null, isRidaisai = false }) {
@@ -30,8 +32,9 @@ export default function Play({ auth, startPageTitle, goalPageTitle, errorCode = 
     const [elapsedSeconds, setElapsedSeconds] = useState(0);
     const [goalTime, setGoalTime] = useState(null);
     const [showTimeOverModal, setShowTimeOverModal] = useState(false);
+    const [canCountUp, setCanCountUp] = useState(false);
 
-    countUpIntervalSeconds(elapsedSeconds, setElapsedSeconds);
+    countUpIntervalSeconds(elapsedSeconds, setElapsedSeconds, canCountUp);
 
     useEffect(() => {
         if (elapsedSeconds == TIME_LIMIT_SECONDS) {
@@ -104,7 +107,7 @@ export default function Play({ auth, startPageTitle, goalPageTitle, errorCode = 
             <div className='justify-center m-3'>
                 {wikiPageViewer(currentPageTitle, updateCurrentPage, true)}
             </div>
-
+            <Tutorial exitFunc={() => setCanCountUp(true)} />
 
             <Modal show={showHintModal} closeable={true} onClose={setShowHintModal}>
                 {wikiPageViewer(goalPageTitle, () => { }, false)}
