@@ -57,7 +57,7 @@ class PlayController extends Controller
         # score + elapsedSeconds(6桁)の形式で、scoreを一つの数値に変換
         $score = $score * 1000000 + $elapsedSeconds;
 
-        $endpoint = "http://54.84.41.124:8080";
+        $endpoint = "http://54.84.41.124:8080/1";
         $client = new \GuzzleHttp\Client();
         try {
             $client->post($endpoint, [
