@@ -9,7 +9,10 @@ use App\Services\GameService;
 use App\Services\MediawikiService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -70,7 +73,7 @@ class PlayController extends Controller
     /**
      * Submit an answer for today's challenge.
      */
-    public function goal(SubmitAnswerRequest $request)
+    public function goal(SubmitAnswerRequest $request): JsonResponse
     {
         try {
             $user = $request->user();
@@ -88,18 +91,47 @@ class PlayController extends Controller
                 ]
             ]);
 
-        } catch (Exception $e) {
-            Log::error('Failed to submit answer', [
-                'error' => $e->getMessage(),
+        } catch (ValidationException $e) {
+            // Client error - validation failed
+            Log::warning('Validation failed for answer submission', [
                 'user_id' => $request->user()->id,
                 'question_id' => $request->questionId,
+                'errors' => $e->errors()
             ]);
 
             return response()->json([
                 'success' => false,
-                'message' => $e->getMessage(),
-                'error' => 'Failed to submit answer'
-            ], 400);
+                'message' => 'Invalid data provided. Please check your input.',
+                'error' => 'Validation failed'
+            ], 422);
+
+        } catch (ModelNotFoundException $e) {
+            // Client error - resource not found
+            Log::warning('Resource not found during answer submission', [
+                'user_id' => $request->user()->id,
+                'question_id' => $request->questionId
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'The requested resource was not found.',
+                'error' => 'Resource not found'
+            ], 404);
+
+        } catch (Exception $e) {
+            // Server error - unexpected failure
+            Log::error('Failed to submit answer', [
+                'error' => $e->getMessage(),
+                'user_id' => $request->user()->id,
+                'question_id' => $request->questionId,
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while submitting your answer. Please try again later.',
+                'error' => 'Internal server error'
+            ], 500);
         }
     }
 }
