@@ -1,136 +1,169 @@
-import React, { useState, useEffect } from 'react'; // Add useState and useEffect
+import React, { useState, useEffect } from 'react';
 import parse, { domToReact } from 'html-react-parser';
 
-export default function wikiPageViewer(jaPageTitle, updateCurrentPage, canUpdate) {
+const WIKIPEDIA_API_BASE_URL = 'https://ja.wikipedia.org/w/rest.php/v1/page';
+
+/**
+ * WikiPageViewer component for displaying Wikipedia pages
+ * @param {string} jaPageTitle - The title of the Japanese Wikipedia page
+ * @param {function} updateCurrentPage - Callback function to update the current page
+ * @param {boolean} canUpdate - Whether the component can trigger page updates
+ */
+export default function WikiPageViewer({ jaPageTitle, updateCurrentPage, canUpdate }) {
     const [wikiContent, setWikiContent] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (jaPageTitle !== null) {
-            const fetchContent = async () => {
-                const html = await wikiFetchAsync(jaPageTitle);
-                setWikiContent(
-                    <>
-                        {updateLinksToPopups(html, true)}
-                    </>
-                );
-            };
-            fetchContent();
+            fetchWikiContent();
         }
     }, [jaPageTitle]);
 
-    const wikiFetch = async (title) => {
-        let url = encodeURI(`https://ja.wikipedia.org/w/rest.php/v1/page/${title}/with_html`);
-        const rsp = await fetch(url);
-        const data = await rsp.json(); // Await the response JSON parsing
-        return data.html;
-    }
-
-    const wikiFetchAsync = async (title) => {
+    const fetchWikiContent = async () => {
         setLoading(true);
+        setError(null);
+        
         try {
-            let result = await wikiFetch(title);
-            setLoading(false);
-            return result;
+            const html = await fetchWikiPageHTML(jaPageTitle);
+            setWikiContent(processWikiHTML(html));
         } catch (err) {
-            console.error(err.message);
+            console.error('Error fetching wiki content:', err);
+            setError('ページの読み込みに失敗しました。');
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
-    const updateLinksToPopups = (html) => {
-        const options = {
-            replace: ({ attribs, children, name, parent }) => {
+    const fetchWikiPageHTML = async (title) => {
+        const url = `${WIKIPEDIA_API_BASE_URL}/${encodeURIComponent(title)}/with_html`;
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data.html;
+    };
 
-                if (!attribs || !attribs.href) return;
+    const processWikiHTML = (html) => {
+        return parse(html, {
+            replace: (domNode) => processHTMLNode(domNode),
+        });
+    };
 
-                if (attribs.rel === 'stylesheet') {
-                    attribs.href = 'css/wiki.css'
-                    return;
-                }
+    const processHTMLNode = ({ attribs, children, name, parent }) => {
+        if (!attribs) return;
 
-                // 外部リンクの場合、リンクを削除し、aタグをspanタグに変換
-                if (attribs.href.match(/^(http|https|\/\/|mw-data)/)) {
-                    attribs.href = null;
-                    if (parent && parent.name !== 'head') {
-                        return (
-                            <span
-                                {...attribs}
-                            >
-                                {domToReact(children, options)}
-                            </span>
-                        );
-                    }
-                }
+        // Handle stylesheets
+        if (attribs.rel === 'stylesheet') {
+            return React.createElement(name, {
+                ...attribs,
+                href: 'css/wiki.css'
+            });
+        }
 
-                // class属性をclassNameに変更
-                if (attribs.class) {
-                    attribs.className = attribs.class;
-                    delete attribs.class;
-                }
+        // Handle external links
+        if (attribs.href && isExternalLink(attribs.href)) {
+            return createDisabledLink(attribs, children, name);
+        }
 
-                // style属性が存在し、それが文字列である場合
-                if (attribs.style && typeof attribs.style === 'string') {
-                    // style属性をオブジェクトに変換
-                    const styleObject = attribs.style.split(';').reduce((obj, styleDeclaration) => {
-                        const parts = styleDeclaration.split(':');
-                        if (parts[0] && parts[1]) {
-                            let property = parts[0].trim();
-                            // CSSプロパティをcamelCaseに変換
-                            property = property.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
-                            obj[property] = parts[1].trim();
-                        }
-                        return obj;
-                    }, {});
-                    attribs.style = styleObject;
-                }
+        // Process attributes
+        const processedAttribs = processAttributes(attribs);
 
-                // aタグの場合
-                if (attribs.href && parent && parent.name !== 'head') {
-                    // 一階層下のリンクのみを対象にする ex. ./hoge
-                    const isChildLink = attribs.href.match(/^\.\/(?!.*(#cite|\?))[^\/]*$/);
-
-                    if (isChildLink) {
-                        return (
-                            <a
-                                {...attribs}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    if (!canUpdate) {
-                                        return;
-                                    }
-                                    setLoading(true);
-                                    const nextPageTitle = attribs.href.replace('./', '');
-                                    updateCurrentPage(nextPageTitle);
-                                    window.scrollTo({ top: 0, behavior: "smooth" })
-                                }}
-                            >
-                                {domToReact(children, options)}
-                            </a>
-                        );
-                    } else {
-                        attribs.href = null;
-                        return (
-                            <span
-                                {...attribs}
-                            >
-                                {domToReact(children, options)}
-                            </span >
-                        );
-                    }
-                }
+        // Handle internal Wikipedia links
+        if (attribs.href && parent && parent.name !== 'head') {
+            const isValidInternalLink = /^\.\/(?!.*(#cite|\?))[^\/]*$/.test(attribs.href);
+            
+            if (isValidInternalLink) {
+                return createInternalLink(processedAttribs, children, attribs.href);
+            } else {
+                return createDisabledLink(processedAttribs, children, 'span');
             }
         }
 
-        return parse(html, options);
-    }
+        return undefined;
+    };
 
-    if (loading || wikiContent === null) {
+    const isExternalLink = (href) => {
+        return /^(http|https|\/\/|mw-data)/.test(href);
+    };
+
+    const createDisabledLink = (attribs, children, tagName = 'span') => {
+        const processedAttribs = processAttributes({ ...attribs, href: null });
+        return React.createElement(tagName, processedAttribs, 
+            children && domToReact(children, { replace: processHTMLNode })
+        );
+    };
+
+    const createInternalLink = (attribs, children, href) => {
         return (
-            <>
-                <p>loading...</p>
-            </>
-        )
+            <a
+                {...attribs}
+                onClick={handleInternalLinkClick(href)}
+            >
+                {children && domToReact(children, { replace: processHTMLNode })}
+            </a>
+        );
+    };
+
+    const handleInternalLinkClick = (href) => (e) => {
+        e.preventDefault();
+        
+        if (!canUpdate) {
+            return;
+        }
+        
+        setLoading(true);
+        const nextPageTitle = href.replace('./', '');
+        updateCurrentPage(nextPageTitle);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    const processAttributes = (attribs) => {
+        const processed = { ...attribs };
+        
+        // Convert class to className
+        if (processed.class) {
+            processed.className = processed.class;
+            delete processed.class;
+        }
+        
+        // Convert style string to object
+        if (processed.style && typeof processed.style === 'string') {
+            processed.style = parseStyleString(processed.style);
+        }
+        
+        return processed;
+    };
+
+    const parseStyleString = (styleString) => {
+        return styleString.split(';').reduce((obj, styleDeclaration) => {
+            const [property, value] = styleDeclaration.split(':');
+            if (property && value) {
+                const camelCaseProperty = property.trim().replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+                obj[camelCaseProperty] = value.trim();
+            }
+            return obj;
+        }, {});
+    };
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center p-8">
+                <div className="text-lg">読み込み中...</div>
+            </div>
+        );
     }
 
-    return wikiContent;
+    if (error) {
+        return (
+            <div className="flex justify-center items-center p-8">
+                <div className="text-red-600">{error}</div>
+            </div>
+        );
+    }
+
+    return <div className="wiki-content">{wikiContent}</div>;
 }

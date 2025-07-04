@@ -2,62 +2,89 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Services\MediawikiService;
-use App\Models\Question;
+use App\Http\Requests\SubmitAnswerRequest;
 use App\Models\Answer;
+use App\Models\Question;
+use App\Services\GameService;
+use App\Services\MediawikiService;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class PlayController extends Controller
 {
-    public function random()
+    public function __construct(
+        private readonly MediawikiService $mediawikiService,
+        private readonly GameService $gameService
+    ) {}
+
+    /**
+     * Get a random Wikipedia Golf game.
+     */
+    public function random(): Response
     {
-        $mediawikiService = new MediawikiService();
-        $twoRandomPageTitles = $mediawikiService->getRandomJaWikiPagesTitles(2);
-        return Inertia::render(
-            'Play',
-            [
+        try {
+            $twoRandomPageTitles = $this->mediawikiService->getRandomJaWikiPagesTitles(2);
+            
+            return Inertia::render('Play', [
                 'startPageTitle' => $twoRandomPageTitles[0],
                 'goalPageTitle' => $twoRandomPageTitles[1],
-            ]
-        );
-    }
-
-    public function today()
-    {
-        // 昨日取得したうち、最新の問題を取得
-        $todaysPageTitlesResponse = Question::where('created_at', '>', now()->subDay()->startOfDay())
-            ->where('created_at', '<', now()->startOfDay())
-            ->get()
-            ->last()
-            ->toArray();
-
-        return Inertia::render(
-            'Play',
-            [
-                'startPageTitle' => $todaysPageTitlesResponse['start_page'],
-                'goalPageTitle' => $todaysPageTitlesResponse['goal_page'],
-                'questionId' => $todaysPageTitlesResponse['question_id'],
-            ]
-        );
-    }
-
-    public function goal(Request $request)
-    {   
-        // 既に解答済みかどうかを確認
-        if (Answer::where('user_id', $request->user()->id)
-            ->where('question_id', $request->questionId)
-            ->exists()
-        ){
-            return;
+            ]);
+        } catch (Exception $e) {
+            Log::error('Failed to get random pages', ['error' => $e->getMessage()]);
+            
+            return Inertia::render('Play', [
+                'startPageTitle' => 'エラー',
+                'goalPageTitle' => 'エラー',
+                'error' => 'ページの取得に失敗しました。もう一度お試しください。',
+            ]);
         }
-        $answer = new Answer();
-        $answer->user_id = $request->user()->id;
-        $answer->question_id = $request->questionId;
-        $answer->score = $request->score;
-        $answer->play_history = $request->playHistory;
-        $answer->save();
-        return;
     }
 
+    /**
+     * Get today's Wikipedia Golf challenge.
+     */
+    public function today(): Response
+    {
+        try {
+            $todaysQuestion = Question::getTodaysQuestion();
+            
+            if (!$todaysQuestion) {
+                Log::warning('No question found for today');
+                return redirect()->route('play.random');
+            }
+
+            return Inertia::render('Play', [
+                'startPageTitle' => $todaysQuestion->start_page,
+                'goalPageTitle' => $todaysQuestion->goal_page,
+                'questionId' => $todaysQuestion->question_id,
+            ]);
+        } catch (Exception $e) {
+            Log::error('Failed to get today\'s question', ['error' => $e->getMessage()]);
+            return redirect()->route('play.random');
+        }
+    }
+
+    /**
+     * Submit an answer for today's challenge.
+     */
+    public function goal(SubmitAnswerRequest $request): void
+    {
+        try {
+            $user = $request->user();
+            $question = Question::findOrFail($request->questionId);
+            $playHistory = $request->getPlayHistoryArray();
+
+            $this->gameService->submitAnswer($user, $question, $playHistory);
+
+        } catch (Exception $e) {
+            Log::error('Failed to submit answer', [
+                'error' => $e->getMessage(),
+                'user_id' => $request->user()->id,
+                'question_id' => $request->questionId,
+            ]);
+        }
+    }
 }

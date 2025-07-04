@@ -2,20 +2,44 @@
 declare(strict_types=1);
 namespace App\Services;
 
+use Exception;
+use Illuminate\Support\Facades\Log;
+
 class MediawikiService {
     
-
+    private const WIKIPEDIA_API_ENDPOINT = 'https://ja.wikipedia.org/w/api.php';
+    private const TIMEOUT_SECONDS = 10;
+    
+    /**
+     * Get random Japanese Wikipedia page titles.
+     *
+     * @param int $pageNumbers Number of pages to retrieve
+     * @return array Array of page titles
+     * @throws Exception
+     */
     public function getRandomJaWikiPagesTitles(int $pageNumbers): array {
         $result = $this->fetchRandomJaPagesDataFromMediaAPI($pageNumbers);
-        $titles = array();
-        foreach( $result["query"]["random"] as $k => $v ) {
-            array_push($titles, $v["title"]);
+        
+        if (!isset($result['query']['random'])) {
+            throw new Exception('Invalid API response format');
         }
+        
+        $titles = [];
+        foreach ($result['query']['random'] as $page) {
+            $titles[] = $page['title'];
+        }
+        
         return $titles;
     }
 
-    // Function to fetch data from the API
-    public function fetchRandomJaPagesDataFromMediaAPI(int $pageNumbers) {
+    /**
+     * Fetch random Japanese Wikipedia pages from MediaWiki API.
+     *
+     * @param int $pageNumbers Number of pages to retrieve
+     * @return array API response data
+     * @throws Exception
+     */
+    private function fetchRandomJaPagesDataFromMediaAPI(int $pageNumbers): array {
         /*
             get_random.php
 
@@ -24,7 +48,6 @@ class MediawikiService {
 
             MIT License
         */
-        $endPoint = "https://ja.wikipedia.org/w/api.php";
         $params = [
             "action" => "query",
             "format" => "json",
@@ -33,28 +56,40 @@ class MediawikiService {
             "rnnamespace" => "0",
         ];
 
-        $url = $endPoint . "?" . http_build_query( $params );
+        $url = self::WIKIPEDIA_API_ENDPOINT . "?" . http_build_query( $params );
 
         $ch = curl_init( $url );
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-        curl_setopt( $ch, CURLOPT_TIMEOUT, 10 ); // Set timeout value in seconds
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10); // Set connect timeout value in seconds
+        curl_setopt( $ch, CURLOPT_TIMEOUT, self::TIMEOUT_SECONDS ); // Set timeout value in seconds
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::TIMEOUT_SECONDS); // Set connect timeout value in seconds
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Wikipedia Golf App/1.0');
         $output = curl_exec( $ch );
 
         if ($output === false) {
-            throw new \Exception('Failed to fetch data from the API: ' . curl_error($ch));
+            $error = curl_error($ch);
+            curl_close($ch);
+            Log::error('MediaWiki API request failed', ['error' => $error]);
+            throw new Exception('Failed to fetch data from the API: ' . $error);
         }
 
-        if (curl_getinfo($ch, CURLINFO_HTTP_CODE) === 0) {
-            throw new \Exception('Request to the API timed out.');
-        }
-
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close( $ch );
+
+        if ($httpCode === 0) {
+            Log::error('MediaWiki API request timed out');
+            throw new Exception('Request to the API timed out.');
+        }
+
+        if ($httpCode !== 200) {
+            Log::error('MediaWiki API returned non-200 status', ['status' => $httpCode]);
+            throw new Exception('API returned status code: ' . $httpCode);
+        }
 
         $result = json_decode( $output, true );
 
         if ($result === null) {
-            throw new \Exception('Failed to decode API response: ' . json_last_error_msg());
+            Log::error('Failed to decode MediaWiki API response', ['json_error' => json_last_error_msg()]);
+            throw new Exception('Failed to decode API response: ' . json_last_error_msg());
         }
 
         return $result;

@@ -13,11 +13,22 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id('answer_id');
-            $table->bigInteger('user_id');
-            $table->bigInteger('question_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('question_id');
             $table->integer('score');
             $table->json('play_history');
             $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('question_id')->references('question_id')->on('questions')->onDelete('cascade');
+            
+            // Indexes for better performance
+            $table->index(['user_id', 'question_id']);
+            $table->index(['question_id', 'score']);
+            
+            // Unique constraint to prevent duplicate answers
+            $table->unique(['user_id', 'question_id']);
         });
     }
 
