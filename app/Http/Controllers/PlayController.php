@@ -7,6 +7,7 @@ use App\Services\MediawikiService;
 use App\Models\Question;
 use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class PlayController extends Controller
 {
