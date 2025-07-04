@@ -23,7 +23,6 @@ class SubmitAnswerRequest extends FormRequest
     {
         return [
             'questionId' => 'required|integer|exists:questions,question_id',
-            'score' => 'required|integer|min:0|max:1000',
             'playHistory' => 'required|string|max:10000',
         ];
     }
@@ -38,9 +37,6 @@ class SubmitAnswerRequest extends FormRequest
         return [
             'questionId.required' => '問題IDが必要です。',
             'questionId.exists' => '指定された問題が存在しません。',
-            'score.required' => 'スコアが必要です。',
-            'score.min' => 'スコアは0以上である必要があります。',
-            'score.max' => 'スコアが高すぎます。',
             'playHistory.required' => 'プレイ履歴が必要です。',
             'playHistory.max' => 'プレイ履歴が長すぎます。',
         ];
