@@ -70,14 +70,23 @@ class PlayController extends Controller
     /**
      * Submit an answer for today's challenge.
      */
-    public function goal(SubmitAnswerRequest $request): void
+    public function goal(SubmitAnswerRequest $request)
     {
         try {
             $user = $request->user();
             $question = Question::findOrFail($request->questionId);
             $playHistory = $request->getPlayHistoryArray();
 
-            $this->gameService->submitAnswer($user, $question, $playHistory);
+            $answer = $this->gameService->submitAnswer($user, $question, $playHistory);
+
+            return response()->json([
+                'success' => true,
+                'message' => '回答を提出しました',
+                'data' => [
+                    'score' => $answer->score,
+                    'answer_id' => $answer->id,
+                ]
+            ]);
 
         } catch (Exception $e) {
             Log::error('Failed to submit answer', [
@@ -85,6 +94,12 @@ class PlayController extends Controller
                 'user_id' => $request->user()->id,
                 'question_id' => $request->questionId,
             ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'error' => 'Failed to submit answer'
+            ], 400);
         }
     }
 }
