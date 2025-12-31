@@ -43,7 +43,9 @@ class MediawikiService {
         $output = curl_exec( $ch );
 
         if ($output === false) {
-            throw new \Exception('Failed to fetch data from the API: ' . curl_error($ch));
+            $errorMessage = curl_error($ch);
+            curl_close($ch);
+            throw new \Exception('Failed to fetch data from the API: ' . $errorMessage);
         }
 
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -67,7 +69,7 @@ class MediawikiService {
 
         $result = json_decode( $output, true );
 
-        if ($result === null) {
+        if (json_last_error() !== JSON_ERROR_NONE) {
             \Log::error('Failed to decode MediaWiki API response', [
                 'json_error' => json_last_error_msg(),
                 'url' => $url,
