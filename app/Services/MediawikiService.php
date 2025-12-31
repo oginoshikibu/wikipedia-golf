@@ -45,8 +45,21 @@ class MediawikiService {
             throw new \Exception('Failed to fetch data from the API: ' . curl_error($ch));
         }
 
-        if (curl_getinfo($ch, CURLINFO_HTTP_CODE) === 0) {
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
+        if ($httpCode === 0) {
+            curl_close($ch);
             throw new \Exception('Request to the API timed out.');
+        }
+
+        if ($httpCode !== 200) {
+            curl_close($ch);
+            \Log::error('MediaWiki API request failed', [
+                'http_code' => $httpCode,
+                'url' => $url,
+                'response' => substr($output, 0, 1000)
+            ]);
+            throw new \Exception("MediaWiki API request failed with HTTP code: $httpCode");
         }
 
         curl_close( $ch );
@@ -54,6 +67,11 @@ class MediawikiService {
         $result = json_decode( $output, true );
 
         if ($result === null) {
+            \Log::error('Failed to decode MediaWiki API response', [
+                'json_error' => json_last_error_msg(),
+                'url' => $url,
+                'response' => substr($output, 0, 1000)
+            ]);
             throw new \Exception('Failed to decode API response: ' . json_last_error_msg());
         }
 
