@@ -39,6 +39,7 @@ class MediawikiService {
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
         curl_setopt( $ch, CURLOPT_TIMEOUT, 10 ); // Set timeout value in seconds
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10); // Set connect timeout value in seconds
+        curl_setopt($ch, CURLOPT_USERAGENT, "Wikipedia Golf Game/1.0 (https://github.com/oginoshikibu/wikipedia-golf)");
         $output = curl_exec( $ch );
 
         if ($output === false) {
